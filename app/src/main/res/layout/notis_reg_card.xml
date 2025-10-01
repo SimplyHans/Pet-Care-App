@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/bg"
+        android:layout_width="372dp"
+        android:layout_height="91dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="#D8CCC8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/notisTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Appointment Accepted"
+        android:textColor="#241F1E"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/desc"
+        tools:layout_editor_absoluteX="32dp" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="330dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="12dp"
+        android:text="Dr. Casilao has accepted your video appointment for 11:30 AM on October 31."
+        android:textColor="#554947"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintEnd_toEndOf="@+id/bg"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="@+id/bg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
