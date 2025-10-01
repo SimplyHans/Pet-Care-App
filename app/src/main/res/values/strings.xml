@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">PetCareApp</string>
+    <string name="welcome_text">
+    Booking appointments for your pets made
+    <font color='#0FF8BF' fontFamily="sans-serif-medium">easier!</font>
+    </string>
+    <string name="register">Register</string>
+    <string name="login">Log In</string>
+    <string name="welcome_back_fellow_pet_lover">Welcome Back Fellow Pet Lover!</string>
+    <string name="back">Back</string>
+    <string name="create_account">Create Account</string>
+
 </resources>
