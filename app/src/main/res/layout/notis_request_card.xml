@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/bg"
+        android:layout_width="373dp"
+        android:layout_height="112dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="#D8CCC8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="330dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="36dp"
+        android:text="Hans Casilao wants to book a video appointment at 11:30 AM on October 31."
+        android:textColor="#554947"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintEnd_toEndOf="@+id/bg"
+        app:layout_constraintHorizontal_bias="0.302"
+        app:layout_constraintStart_toStartOf="@+id/bg" />
+
+    <Button
+        android:id="@+id/acceptBtn"
+        android:layout_width="118dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="40dp"
+        android:backgroundTint="#5B4239"
+        android:text="Accept"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintStart_toStartOf="@+id/bg"
+        app:layout_constraintTop_toTopOf="@+id/bg"
+        app:layout_constraintVertical_bias="0.935" />
+
+    <Button
+        android:id="@+id/declineBtn"
+        android:layout_width="116dp"
+        android:layout_height="36dp"
+        android:backgroundTint="#E07040"
+        android:text="Decline"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintEnd_toEndOf="@+id/bg"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toEndOf="@+id/acceptBtn"
+        app:layout_constraintTop_toTopOf="@+id/bg"
+        app:layout_constraintVertical_bias="0.934" />
+
+    <TextView
+        android:id="@+id/notisTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Appointment Booking Request"
+        android:textColor="#241F1E"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/desc"
+        tools:layout_editor_absoluteX="32dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

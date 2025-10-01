@@ -15,26 +15,25 @@
         android:id="@+id/welcome_text"
         android:layout_width="333dp"
         android:layout_height="100dp"
-        android:layout_marginTop="365dp"
+        android:layout_marginTop="300dp"
         android:gravity="center"
         android:text="@string/welcome_text"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_register"
         android:layout_width="291dp"
         android:layout_height="44.13dp"
+        android:layout_marginTop="140dp"
         android:text="@string/register"
         android:textAllCaps="false"
-        android:textStyle="bold"
-        android:textSize="17sp"
         android:textColor="#403933"
-        android:layout_marginTop="214dp"
-        app:cornerRadius="29dp"
-        app:backgroundTint="@android:color/white"/>
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:backgroundTint="@android:color/white"
+        app:cornerRadius="29dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_login"
@@ -45,7 +44,7 @@
         android:textStyle="bold"
         android:textSize="17sp"
         android:textColor="#ffff"
-        android:layout_marginTop="15.87dp"
+        android:layout_marginTop="1.87dp"
         app:cornerRadius="29dp"
         app:backgroundTint="@color/orange"/>
 

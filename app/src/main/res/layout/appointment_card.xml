@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@+id/view3"
+        android:id="@+id/bg"
         android:layout_width="302dp"
         android:layout_height="111dp"
         android:layout_marginTop="380dp"
@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/desc"
         android:layout_width="166dp"
         android:layout_height="38dp"
         android:layout_marginEnd="12dp"
@@ -25,60 +25,64 @@
         android:textColor="#554947"
         android:textSize="10sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintEnd_toEndOf="@+id/view3" />
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintEnd_toEndOf="@+id/bg" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:text="October 31"
         android:textColor="#554947"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintEnd_toEndOf="@+id/bg"
         app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="@+id/view3" />
+        app:layout_constraintStart_toStartOf="@+id/bg" />
 
     <Button
-        android:id="@+id/tagBtn2"
+        android:id="@+id/tagTwo"
         android:layout_width="64dp"
         android:layout_height="28dp"
+        android:layout_marginStart="8dp"
         android:backgroundTint="#86FFAA"
         android:text="Video"
         android:textColor="#554947"
         android:textSize="6sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3"
-        app:layout_constraintVertical_bias="0.951"
-        tools:layout_editor_absoluteX="208dp" />
+        app:layout_constraintBottom_toBottomOf="@id/bg"
+        app:layout_constraintEnd_toEndOf="@id/desc"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/acceptBtn"
+        app:layout_constraintTop_toTopOf="@+id/bg"
+        app:layout_constraintVertical_bias="0.951" />
 
     <Button
-        android:id="@+id/tagBtn"
+        android:id="@+id/acceptBtn"
         android:layout_width="59dp"
         android:layout_height="28dp"
+        android:layout_marginStart="28dp"
         android:backgroundTint="#5B4239"
         android:text="Dog"
         android:textSize="6sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3"
-        app:layout_constraintVertical_bias="0.951"
-        tools:layout_editor_absoluteX="140dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintStart_toEndOf="@+id/day"
+        app:layout_constraintTop_toTopOf="@+id/bg"
+        app:layout_constraintVertical_bias="0.951" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/notisTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dr. Casilao"
         android:textColor="#241F1E"
         android:textSize="17sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/desc"
         tools:layout_editor_absoluteX="140dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
@@ -86,10 +90,11 @@
         android:textColor="#241F1E"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3"
+        app:layout_constraintBottom_toTopOf="@+id/day"
+        app:layout_constraintEnd_toEndOf="@+id/bg"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toStartOf="@+id/bg"
+        app:layout_constraintTop_toTopOf="@+id/bg"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
