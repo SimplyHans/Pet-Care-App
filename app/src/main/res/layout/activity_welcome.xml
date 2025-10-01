@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_welcome_gradient"
     android:orientation="vertical"
+    android:padding="24dp"
     android:gravity="center_horizontal"
-    android:padding="24dp">
-
+    android:background="@drawable/bg_welcome_gradient">
 
     <TextView
         android:id="@+id/welcome_text"
@@ -25,8 +23,12 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_register"
         android:layout_width="291dp"
+<<<<<<< HEAD
         android:layout_height="44.13dp"
         android:layout_marginTop="140dp"
+=======
+        android:layout_height="44dp"
+>>>>>>> 617d338c3f32ee281ad3e5f4343d8ae3084047d4
         android:text="@string/register"
         android:textAllCaps="false"
         android:textColor="#403933"
@@ -38,17 +40,19 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_login"
         android:layout_width="291dp"
-        android:layout_height="44.13dp"
+        android:layout_height="44dp"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textStyle="bold"
         android:textSize="17sp"
+<<<<<<< HEAD
         android:textColor="#ffff"
         android:layout_marginTop="1.87dp"
+=======
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+>>>>>>> 617d338c3f32ee281ad3e5f4343d8ae3084047d4
         app:cornerRadius="29dp"
         app:backgroundTint="@color/orange"/>
-
-
-
 
 </LinearLayout>
