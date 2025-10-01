@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D8CCC8">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="414dp"
+        android:layout_height="538dp"
+        android:layout_marginTop="324dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="#EFE6E2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-2dp" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="411dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="#EFE6E2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="141dp"
+        android:layout_height="33dp"
+        android:text="PetCare App"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="50dp" />
+
+    <TextView
+        android:id="@+id/title2"
+        android:layout_width="244dp"
+        android:layout_height="26dp"
+        android:text="Upcoming Appointments"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="340dp" />
+
+    <include
+        layout="@layout/appointment_card">
+
+    </include>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="33dp"
+        android:layout_height="42dp"
+        android:backgroundTint="#5B4239"
+        tools:layout_editor_absoluteX="320dp"
+        tools:layout_editor_absoluteY="42dp" />
+
+    <TextView
+        android:id="@+id/title3"
+        android:layout_width="252dp"
+        android:layout_height="34dp"
+        android:text="Your Pets"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="507dp" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="86dp"
+        android:layout_height="39dp"
+        android:backgroundTint="#5B4239"
+        android:text="View All"
+        android:textSize="10sp"
+        tools:layout_editor_absoluteX="299dp"
+        tools:layout_editor_absoluteY="502dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="33dp"
+        android:layout_height="42dp"
+        android:backgroundTint="#5B4239"
+        tools:layout_editor_absoluteX="362dp"
+        tools:layout_editor_absoluteY="41dp" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="179dp"
+        android:layout_height="194dp"
+        android:backgroundTint="#EDE4E0"
+        app:cornerRadius="15dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="114dp" />
+
+    <Button
+        android:id="@+id/addBtn4"
+        android:layout_width="87dp"
+        android:layout_height="112dp"
+        android:backgroundTint="#D57E5F"
+        app:cornerRadius="15dp"
+        tools:layout_editor_absoluteX="362dp"
+        tools:layout_editor_absoluteY="558dp" />
+
+    <TextView
+        android:id="@+id/itemTitle2"
+        android:layout_width="53dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="44dp"
+        android:elegantTextHeight="false"
+        android:text="Daisy"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="286dp" />
+
+    <Button
+        android:id="@+id/addBtn3"
+        android:layout_width="103dp"
+        android:layout_height="113dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#D57E5F"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/itemTitle2"
+        tools:layout_editor_absoluteX="250dp" />
+
+    <TextView
+        android:id="@+id/itemTitle"
+        android:layout_width="27dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="44dp"
+        android:text="Bud"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="168dp" />
+
+    <Button
+        android:id="@+id/addBtn2"
+        android:layout_width="103dp"
+        android:layout_height="113dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#D57E5F"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/itemTitle"
+        tools:layout_editor_absoluteX="131dp" />
+
+    <TextView
+        android:id="@+id/ItemTitle"
+        android:layout_width="27dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="44dp"
+        android:text="Add"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="54dp" />
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="103dp"
+        android:layout_height="113dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#5B4239"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="179dp"
+        android:layout_height="194dp"
+        android:backgroundTint="#EDE4E0"
+        app:cornerRadius="15dp"
+        tools:layout_editor_absoluteX="216dp"
+        tools:layout_editor_absoluteY="114dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Walker"
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="269dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vets"
+        tools:layout_editor_absoluteX="310dp"
+        tools:layout_editor_absoluteY="269dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
