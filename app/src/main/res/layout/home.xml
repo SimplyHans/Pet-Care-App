@@ -125,7 +125,7 @@
         android:backgroundTint="#D57E5F"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@+id/itemTitle1"
-        tools:layout_editor_absoluteX="131dp" />
+        tools:layout_editor_absoluteX="133dp" />
 
     <TextView
         android:id="@+id/ItemTitle"

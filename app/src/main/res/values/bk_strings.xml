@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bk_continue">Continue</string>
+    <string name="bk_caregiver_title">Choose who want to take care of your pet.</string>
+    <string name="bk_caregiver_item">Dr. Casilao</string>
+    <string name="bk_datetime_title">When do you want to schedule your appointment?</string>
+    <string name="bk_day_hint">Day</string>
+    <string name="bk_time_hint">Time here</string>
+    <string name="bk_service_type_title">What type of pet service are you looking for?</string>
+    <string name="bk_services">Services</string>
+    <string name="bk_vets">Vets</string>
+</resources>

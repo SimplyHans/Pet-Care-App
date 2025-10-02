@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bk_nav_graph"
+    app:startDestination="@id/bkCaregiverPickerFragment">
+
+    <fragment
+        android:id="@+id/bkCaregiverPickerFragment"
+        android:name="ca.gbc.petcareapp.feature.booking.BkCaregiverPickerFragment"
+        android:label="Caregiver Picker">
+        <action
+            android:id="@+id/action_bkCaregiverPicker_to_bkDateTime"
+            app:destination="@id/bkDateTimeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bkDateTimeFragment"
+        android:name="ca.gbc.petcareapp.feature.booking.BkDateTimeFragment"
+        android:label="Date/Time">
+        <action
+            android:id="@+id/action_bkDateTime_to_bkServiceType"
+            app:destination="@id/bkServiceTypeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bkServiceTypeFragment"
+        android:name="ca.gbc.petcareapp.feature.booking.BkServiceTypeFragment"
+        android:label="Service Type" />
+</navigation>
