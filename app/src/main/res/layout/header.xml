@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,13 +11,14 @@
         android:id="@+id/viewBG_top"
         android:layout_width="411dp"
         android:layout_height="94dp"
-        android:background="@drawable/rounded_background"
+        android:background="@drawable/bg_header_panel"
         android:backgroundTint="#EFE6E2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        />
 
     <TextView
         android:id="@+id/title"
@@ -25,7 +26,7 @@
         android:layout_height="33dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="96dp"
-        android:text="PetCare App"
+        android:text="@string/petcare_app"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/viewBG_top"

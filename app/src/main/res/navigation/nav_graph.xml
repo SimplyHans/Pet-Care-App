@@ -20,14 +20,38 @@
     </fragment>
 
     <fragment
+        android:id="@+id/homeFragment"
+        android:name="ca.gbc.petcareapp.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/home" />
+
+    <fragment
         android:id="@+id/loginFragment"
         android:name="ca.gbc.petcareapp.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/activity_login" />
+        tools:layout="@layout/activity_login" >
+
+        <action
+            android:id="@+id/action_login_to_welcome"
+            app:destination="@id/homeFragment"
+            />
+    </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="ca.gbc.petcareapp.RegisterFragment"
         android:label="Register"
-        tools:layout="@layout/activity_register" />
+        tools:layout="@layout/activity_register"
+
+        />
+
+
+
+
+
+
+
+
+
+
 </navigation>
