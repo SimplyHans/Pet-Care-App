@@ -11,5 +11,6 @@
     <string name="create_account">Create Account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="what_type_of_pet_do_you_want_to_add">What type of pet do you want to add?</string>
 
 </resources>

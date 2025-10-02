@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D8CCC8"
-    tools:context=".AddPetTypeFragment">
+    tools:context=".AddPetNameFragment">
 
     <include
         android:id="@+id/header"
@@ -18,13 +18,13 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/petTypeCard"
+        android:id="@+id/addPetNameCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
-        app:cardBackgroundColor="#EDE5E1"
+        app:cardBackgroundColor="#EFE6E2"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,89 +36,54 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/AskPetType"
+                android:id="@+id/askPetName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="96dp"
+                android:layout_marginTop="188dp"
                 android:gravity="center"
-                android:text="What type of pet do you want to add?"
-                android:textSize="24sp"
+                android:text="Time to name your pet!"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_margin="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioGroup
-                android:id="@+id/petTypeGroup"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="#3C9F938D"
+                android:gravity="center"
+                android:hint="Name here..."
+                android:padding="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/AskPetType">
+                app:layout_constraintTop_toBottomOf="@id/askPetName" />
 
-                <RadioButton
-                    android:id="@+id/petType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background"
-                    android:backgroundTint="#E69C77"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="Dog"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <RadioButton
-                    android:id="@+id/petType2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background"
-                    android:backgroundTint="#E69C77"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="Cat"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <RadioButton
-                    android:id="@+id/petType3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background"
-                    android:backgroundTint="#E69C77"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="Reptile"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <RadioButton
-                    android:id="@+id/petType4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background"
-                    android:backgroundTint="#E69C77"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="Bird"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </RadioGroup>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addPetButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Add Pet"
+                android:textSize="20sp"
+                app:backgroundTint="#403933"
+                app:cornerRadius="24dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameInput" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/backButton"
-                android:layout_width="50dp"
+                android:layout_width="53dp"
                 android:layout_height="53dp"
+                android:layout_marginTop="16dp"
                 android:textSize="25sp"
                 app:backgroundTint="#403933"
                 app:cornerRadius="24dp"
@@ -127,24 +92,7 @@
                 app:iconPadding="8dp"
                 app:iconSize="45dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_margin="24dp"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_backPetType2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Next"
-                android:textSize="25sp"
-                app:backgroundTint="#403933"
-                app:cornerRadius="24dp"
-                app:iconGravity="textStart"
-                app:iconPadding="8dp"
-                app:iconSize="45dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_margin="24dp"
-                app:layout_constraintTop_toBottomOf="@id/petTypeGroup" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
