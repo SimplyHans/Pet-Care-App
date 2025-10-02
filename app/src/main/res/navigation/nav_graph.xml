@@ -30,4 +30,49 @@
         android:name="ca.gbc.petcareapp.RegisterFragment"
         android:label="Register"
         tools:layout="@layout/activity_register" />
+
+
+    <fragment
+        android:id="@+id/petListFragment"
+        android:name="ca.gbc.petcareapp.PetListFragment"
+        android:label="Pet List"
+        tools:layout="@layout/pet_list">
+        <action
+            android:id="@+id/action_petListFragment_to_addPetTypeFragment"
+            app:destination="@id/addPetTypeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addPetTypeFragment"
+        android:name="ca.gbc.petcareapp.AddPetTypeFragment"
+        android:label="Add Pet Type"
+        tools:layout="@layout/fragment_add_pet_type" />
+
+    <fragment
+        android:id="@+id/addPetNameFragment"
+        android:name="ca.gbc.petcareapp.AddPetNameFragment"
+        android:label="Add Pet Name"
+        tools:layout="@layout/add_pet_name" />
+
+    <fragment
+        android:id="@+id/addPetTypeFragment"
+        android:name="ca.gbc.petcareapp.AddPetTypeFragment"
+        android:label="Add Pet Type"
+        tools:layout="@layout/fragment_add_pet_type">
+
+        <action
+            android:id="@+id/action_addPetTypeFragment_to_addPetNameFragment"
+            app:destination="@id/addPetNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPetNameFragment"
+        android:name="ca.gbc.petcareapp.AddPetNameFragment"
+        android:label="Add Pet Name"
+        tools:layout="@layout/add_pet_name">
+
+        <action
+            android:id="@+id/action_addPetNameFragment_to_petListFragment"
+            app:destination="@id/petListFragment" />
+    </fragment>
+
 </navigation>
