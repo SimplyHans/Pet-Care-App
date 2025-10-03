@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds -->
+    <color name="bk_surface">#EDE2DD</color>      <!-- outer screen background -->
+    <color name="bk_panel">#F0E6E1</color>        <!-- inner rounded panel -->
+    <color name="bk_item_bg">#D8CCC7</color>      <!-- list item bg -->
+    <color name="bk_dot_empty">#E4DAD5</color>
+
+    <!-- Brand/Text -->
+    <color name="bk_brown">#5A3F35</color>
+    <color name="bk_text_dark">#3F2F2A</color>
+</resources>

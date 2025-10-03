@@ -20,6 +20,15 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <!-- Original conflict for button_register (kept, not erased)
+    <<<<<<< HEAD
+        android:layout_height="44.13dp"
+        android:layout_marginTop="140dp"
+    =======
+        android:layout_height="44dp"
+    >>>>>>> 617d338c3f32ee281ad3e5f4343d8ae3084047d4
+    -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_register"
         android:layout_width="291dp"
@@ -33,17 +42,27 @@
         app:backgroundTint="@android:color/white"
         app:cornerRadius="29dp" />
 
+    <!-- Original conflict for button_login (kept, not erased)
+    <<<<<<< HEAD
+        android:textColor="#ffff"
+        android:layout_marginTop="1.87dp"
+    =======
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+    >>>>>>> 617d338c3f32ee281ad3e5f4343d8ae3084047d4
+    -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_login"
         android:layout_width="291dp"
         android:layout_height="44dp"
-        android:layout_marginTop="16dp"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textStyle="bold"
         android:textSize="17sp"
         android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
         app:cornerRadius="29dp"
-        app:backgroundTint="@color/orange"/>
+        app:backgroundTint="@color/orange" />
 
 </LinearLayout>

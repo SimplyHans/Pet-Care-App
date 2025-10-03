@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bk_surface"
+    android:padding="16dp">
+
+    <!-- Header (your shared layout) -->
+    <include
+        android:id="@+id/header"
+        layout="@layout/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Inner rounded panel that holds everything else -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bk_panel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:cardUseCompatPadding="false"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/bk_panel"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/bk_btn_continue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Progress dots (reuse your dot drawables) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="2dp"
+                android:paddingBottom="6dp">
+
+                <View
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bk_dot_filled" />
+
+                <View
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bk_dot_filled" />
+
+                <View
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bk_dot_empty" />
+
+                <View
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/bk_dot_empty" />
+            </LinearLayout>
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/bk_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="When do you want to\nschedule your appointment?"
+                android:textColor="@color/bk_text_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Spacing -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <!-- Day field (uses your rounded item bg for the soft pill look) -->
+            <LinearLayout
+                android:id="@+id/bk_day_field"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bk_item_bg"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <EditText
+                    android:id="@+id/bk_input_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Day"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/bk_text_dark"
+                    android:textColorHint="#9F8F89" />
+            </LinearLayout>
+
+            <!-- Spacing -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
+            <!-- Time field (same rounded bg) -->
+            <LinearLayout
+                android:id="@+id/bk_time_field"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/bk_item_bg"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <EditText
+                    android:id="@+id/bk_input_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Time here"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/bk_text_dark"
+                    android:textColorHint="#9F8F89" />
+            </LinearLayout>
+
+            <!-- Growable space so the button sticks to panel bottom visually -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Continue button (pill) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bk_btn_continue"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/bk_continue"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:cornerRadius="24dp"
+        app:backgroundTint="@color/bk_brown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
