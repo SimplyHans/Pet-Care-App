@@ -2,10 +2,11 @@ package ca.gbc.petcareapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 
-class RegisterFragment : Fragment(R.layout.activity_register) {
-    }
+class AddPetTypeFragment : Fragment(R.layout.add_pet_type) {
 
+
+}
