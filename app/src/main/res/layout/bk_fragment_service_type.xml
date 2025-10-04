@@ -152,17 +152,16 @@
         app:backgroundTint="@color/bk_brown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@+id/nav"/>
 
-    <!-- Bottom tiny pill -->
-    <View
-        android:id="@+id/bottom_pill"
-        android:layout_width="54dp"
-        android:layout_height="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bk_item_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <include
+        android:id="@+id/nav"
+        layout="@layout/navbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

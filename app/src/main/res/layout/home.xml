@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
@@ -7,34 +8,53 @@
     android:layout_height="match_parent"
     android:background="#D8CCC8">
 
+    <View
+        android:id="@+id/viewBG_top2"
+        android:layout_width="415dp"
+        android:layout_height="412dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="#EFE6E2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <include
         android:id="@+id/header"
         layout="@layout/header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"/>
-    <View
-        android:id="@+id/viewBG_bottom"
-        android:layout_width="411dp"
-        android:layout_height="405dp"
-        android:background="@drawable/rounded_background"
-        android:backgroundTint="#EFE6E2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/businessRoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#EDE4E0"
+        android:text="View People in Business Role"
+        android:textColor="#421111"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <TextView
         android:id="@+id/appointmentTitle"
-        android:layout_width="244dp"
-        android:layout_height="26dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:text="Upcoming Appointments"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="342dp" />
+        app:layout_constraintTop_toBottomOf="@id/businessRoleBtn" />
 
     <include
         android:id="@+id/appointmentCard"
@@ -45,120 +65,143 @@
 
     <TextView
         android:id="@+id/petsTitle"
-        android:layout_width="252dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Your Pets"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/viewBG_bottom"
-        tools:layout_editor_absoluteY="507dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/appointmentCard"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/viewPetsBtn"
-        android:layout_width="86dp"
-        android:layout_height="39dp"
-        android:backgroundTint="#5B4239"
-        android:text="View All"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/viewBG_bottom"
-        app:layout_constraintStart_toEndOf="@+id/petsTitle"
-        tools:layout_editor_absoluteY="502dp" />
-
-    <Button
-        android:id="@+id/businessRoleBtn"
-        android:layout_width="366dp"
-        android:layout_height="199dp"
-        android:backgroundTint="#EDE4E0"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/viewBG_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/item3"
-        android:layout_width="87dp"
-        android:layout_height="112dp"
-        android:backgroundTint="#D57E5F"
-        app:cornerRadius="15dp"
-        tools:layout_editor_absoluteX="362dp"
-        tools:layout_editor_absoluteY="558dp" />
-
-    <TextView
-        android:id="@+id/itemTitle3"
-        android:layout_width="53dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="44dp"
-        android:elegantTextHeight="false"
-        android:text="Daisy"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="286dp" />
-
-    <Button
-        android:id="@+id/item2"
-        android:layout_width="103dp"
-        android:layout_height="113dp"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#D57E5F"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/itemTitle3"
-        tools:layout_editor_absoluteX="250dp" />
-
-    <TextView
-        android:id="@+id/itemTitle1"
-        android:layout_width="27dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="44dp"
-        android:text="Bud"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="168dp" />
-
-    <Button
-        android:id="@+id/item1"
-        android:layout_width="103dp"
-        android:layout_height="113dp"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#D57E5F"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/itemTitle1"
-        tools:layout_editor_absoluteX="133dp" />
-
-    <TextView
-        android:id="@+id/ItemTitle"
-        android:layout_width="27dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="44dp"
-        android:text="Add"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="54dp" />
-
-    <Button
-        android:id="@+id/addBtn"
-        android:layout_width="103dp"
-        android:layout_height="113dp"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#5B4239"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
-        android:id="@+id/businessRoleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View People in Business Role"
-        app:layout_constraintBottom_toBottomOf="@+id/businessRoleBtn"
-        app:layout_constraintEnd_toEndOf="@+id/businessRoleBtn"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/businessRoleBtn"
-        app:layout_constraintTop_toTopOf="@+id/businessRoleBtn"
-        app:layout_constraintVertical_bias="0.883" />
+        android:backgroundTint="#5B4239"
+        android:text="View All"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@id/petsTitle"
+        app:layout_constraintBottom_toBottomOf="@id/petsTitle"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <HorizontalScrollView
+        android:id="@+id/petsScroll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fillViewport="false"
+        android:scrollbars="none"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/petsTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/petsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#5B4239"
+                    app:cornerRadius="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Add"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#D57E5F"
+                    app:cornerRadius="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Bud"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#D57E5F"
+                    app:cornerRadius="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Daisy"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#D57E5F"
+                    app:cornerRadius="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Coco"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <include
+        android:id="@+id/nav"
+        layout="@layout/navbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
