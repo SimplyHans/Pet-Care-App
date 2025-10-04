@@ -113,14 +113,14 @@
         android:id="@+id/button_login"
         android:layout_width="331dp"
         android:layout_height="44dp"
-        android:layout_marginTop="32dp"
         android:layout_marginLeft="31dp"
-        android:text="Next"
+        android:layout_marginTop="32dp"
+        android:text="Register"
         android:textAllCaps="false"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
-        app:cornerRadius="24dp"
-        app:backgroundTint="#403933" />
+        app:backgroundTint="#403933"
+        app:cornerRadius="24dp" />
 
 </LinearLayout>
