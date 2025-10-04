@@ -17,6 +17,7 @@
         <action
             android:id="@+id/action_welcome_to_register"
             app:destination="@id/registerFragment" />
+
     </fragment>
 
     <fragment
@@ -38,19 +39,53 @@
         tools:layout="@layout/pet_list">
 
         <action
-            android:id="@+id/action_petListFragment_to_addPetTypeFragment"
+            android:id="@+id/action_petList_to_addPetType"
             app:destination="@id/addPetTypeFragment" />
+
+        <action
+            android:id="@+id/action_petList_to_petProfile"
+            app:destination="@id/petProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/petProfileFragment"
+        android:name="ca.gbc.petcareapp.PetProfileFragment"
+        android:label="Pet Profile"
+        tools:layout="@layout/pet_profile">
+
+        <action
+            android:id="@+id/action_petProfile_to_petList"
+            app:destination="@id/petListFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/addPetTypeFragment"
         android:name="ca.gbc.petcareapp.AddPetTypeFragment"
         android:label="Add Pet Type"
-        tools:layout="@layout/fragment_add_pet_type">
+        tools:layout="@layout/add_pet_type">
 
         <action
-            android:id="@+id/action_addPetTypeFragment_to_addPetNameFragment"
+            android:id="@+id/action_addPetType_to_addPetDetails"
+            app:destination="@id/addPetDetailsFragment" />
+
+        <action
+            android:id="@+id/action_addPetType_to_petList"
+            app:destination="@id/petListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addPetDetailsFragment"
+        android:name="ca.gbc.petcareapp.AddPetDetailsFragment"
+        android:label="Add Pet Details"
+        tools:layout="@layout/add_pet_details">
+
+        <action
+            android:id="@+id/action_addPetDetails_to_addPetName"
             app:destination="@id/addPetNameFragment" />
+
+        <action
+            android:id="@+id/action_addPetDetails_to_addPetType"
+            app:destination="@id/addPetTypeFragment" />
     </fragment>
 
     <fragment
@@ -60,8 +95,13 @@
         tools:layout="@layout/add_pet_name">
 
         <action
-            android:id="@+id/action_addPetNameFragment_to_petListFragment"
+            android:id="@+id/action_addPetName_to_addPetDetails"
+            app:destination="@id/addPetDetailsFragment" />
+
+        <action
+            android:id="@+id/action_addPetName_to_petList"
             app:destination="@id/petListFragment" />
     </fragment>
+
 
 </navigation>

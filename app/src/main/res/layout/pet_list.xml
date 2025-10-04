@@ -35,7 +35,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Add Pet Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_AddPet"
                 android:layout_width="match_parent"
@@ -50,7 +49,6 @@
                 app:iconPadding="15dp"
                 app:iconSize="35dp" />
 
-            <!-- Row 1 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,7 +89,6 @@
                     app:layout_constraintDimensionRatio="1:1" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Row 2 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

@@ -1,12 +1,21 @@
 package ca.gbc.petcareapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 
-class AddPetDetailsFragment : Fragment() {
+class AddPetDetailsFragment : Fragment(R.layout.add_pet_details) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        view.findViewById<MaterialButton>(R.id.NextButton)?.setOnClickListener {
+            findNavController().navigate(R.id.action_addPetDetails_to_addPetName)
+        }
 
+        view.findViewById<MaterialButton>(R.id.backButton)?.setOnClickListener {
+            findNavController().navigate(R.id.action_addPetDetails_to_addPetType)
+        }
+    }
 }
