@@ -18,7 +18,7 @@ class RegisterFragment : Fragment(R.layout.activity_register) {
         }
 
         view.findViewById<Button>(R.id.button_login)?.setOnClickListener {
-            findNavController().navigate(R.id.action_welcome_to_login)
+            findNavController().navigate(R.id.loginFragment)
         }
     }
     }

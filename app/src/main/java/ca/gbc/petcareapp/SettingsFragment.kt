@@ -35,5 +35,9 @@ class SettingsFragment : Fragment(R.layout.activity_settings) {
         view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
             findNavController().navigate(R.id.notisFragment)
         }
+
+        view.findViewById<Button>(R.id.btn_logout)?.setOnClickListener {
+            findNavController().navigate(R.id.loginFragment)
+        }
     }
 }

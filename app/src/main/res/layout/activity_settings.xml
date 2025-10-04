@@ -105,6 +105,18 @@ android:background="@drawable/top_rounded_bg">
         android:textColor="@android:color/white"
         app:cornerRadius="24dp"
         app:backgroundTint="#584239"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:text="Logout"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#584239"
+        app:cornerRadius="24dp" />
 </LinearLayout>
     </FrameLayout>
 
