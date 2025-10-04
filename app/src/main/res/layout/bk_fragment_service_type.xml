@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bk_surface"
-    android:padding="16dp">
+    android:background="@color/bk_surface">
 
     <!-- Header include -->
     <include
@@ -65,10 +64,6 @@
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/bk_avatar_bg" />
 
-                <View
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:background="@drawable/bk_dot_empty" />
             </LinearLayout>
 
             <!-- Title -->

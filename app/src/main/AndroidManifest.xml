@@ -22,10 +22,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Booking activity (newly added) -->
-        <activity
-            android:name=".BookingActivity"
-            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

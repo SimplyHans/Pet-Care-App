@@ -1,36 +1,40 @@
-package ca.gbc.petcareapp.feature.booking
+package ca.gbc.petcareapp
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import ca.gbc.petcareapp.R
-import ca.gbc.petcareapp.databinding.BkFragmentCaregiverPickerBinding
+import com.google.android.material.button.MaterialButton
 
-class BkCaregiverPickerFragment : Fragment() {
-
-    private var _binding: BkFragmentCaregiverPickerBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = BkFragmentCaregiverPickerBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
+class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.bkBtnContinue.setOnClickListener {
-            findNavController().navigate(R.id.action_bkCaregiverPicker_to_bkDateTime)
+        view.findViewById<Button>(R.id.homeTab)?.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
         }
+
+        view.findViewById<Button>(R.id.bookTab)?.setOnClickListener {
+            findNavController().navigate(R.id.bookCaregiverPickerFragment)
+        }
+
+        view.findViewById<Button>(R.id.petsTab)?.setOnClickListener {
+            findNavController().navigate(R.id.petListFragment)
+        }
+
+        view.findViewById<Button>(R.id.bk_btn_continue)?.setOnClickListener {
+            findNavController().navigate(R.id.bkDateTimeFragment)
+        }
+
+        view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.settingsFragment)
+        }
+
+        view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.notisFragment)
+        }
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

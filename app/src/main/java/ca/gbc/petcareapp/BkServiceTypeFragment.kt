@@ -1,26 +1,40 @@
-package ca.gbc.petcareapp.feature.booking
+package ca.gbc.petcareapp
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
-import ca.gbc.petcareapp.databinding.BkFragmentServiceTypeBinding
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 
-class BkServiceTypeFragment : Fragment() {
+class BkServiceTypeFragment : Fragment(R.layout.bk_fragment_service_type) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    private var _binding: BkFragmentServiceTypeBinding? = null
-    private val binding get() = _binding!!
+        view.findViewById<Button>(R.id.homeTab)?.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+        }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = BkFragmentServiceTypeBinding.inflate(inflater, container, false)
-        return binding.root
+        view.findViewById<Button>(R.id.bookTab)?.setOnClickListener {
+            findNavController().navigate(R.id.bookCaregiverPickerFragment)
+        }
+
+        view.findViewById<Button>(R.id.petsTab)?.setOnClickListener {
+            findNavController().navigate(R.id.petListFragment)
+        }
+
+        view.findViewById<Button>(R.id.bk_btn_continue)?.setOnClickListener {
+            findNavController().navigate(R.id.bookCaregiverPickerFragment)
+        }
+
+        view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.settingsFragment)
+        }
+
+        view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.notisFragment)
+        }
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

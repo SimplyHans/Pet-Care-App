@@ -4,10 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bk_surface"
-    android:padding="16dp">
+    android:background="@color/bk_surface">
 
-    <!-- 🔹 Shared header include -->
     <include
         android:id="@+id/header"
         layout="@layout/header"
@@ -17,20 +15,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Inner rounded card panel (everything else sits inside) -->
+    <include
+        android:id="@+id/nav"
+        layout="@layout/navbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bk_panel"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="false"
+        app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@color/bk_panel"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toTopOf="@+id/bk_btn_continue"
+        app:layout_constraintBottom_toTopOf="@id/bk_btn_continue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,127 +47,101 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Progress dots -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="2dp"
+                android:paddingBottom="6dp">
 
                 <View
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/bk_dot_filled"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bk_dot_filled" />
 
                 <View
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/bk_dot_empty"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bk_dot_empty" />
 
                 <View
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/bk_dot_empty"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bk_dot_empty" />
 
-                <View
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/bk_dot_empty"/>
             </LinearLayout>
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/bk_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="Choose who want to take\ncare of your pet."
-                android:textColor="@color/bk_text_dark"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <!-- Caregiver Items -->
             <LinearLayout
+                android:id="@+id/bk_item1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical">
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bk_item_bg"
+                android:gravity="center_vertical"
+                android:padding="12dp">
 
-                <!-- Item 1 -->
-                <LinearLayout
-                    android:id="@+id/bk_item1"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@drawable/bk_item_bg"
-                    android:gravity="center_vertical"
-                    android:padding="12dp"
-                    android:layout_marginTop="8dp">
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bk_avatar_bg" />
 
-                    <View
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/bk_avatar_bg"
-                        android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Casilao"
+                    android:textColor="@color/bk_text_dark"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dr. Casilao"
-                        android:textColor="@color/bk_text_dark"
-                        android:textSize="14sp"/>
-                </LinearLayout>
+            <LinearLayout
+                android:id="@+id/bk_item2"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bk_item_bg"
+                android:gravity="center_vertical"
+                android:padding="12dp">
 
-                <!-- Item 2 -->
-                <LinearLayout
-                    android:id="@+id/bk_item2"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@drawable/bk_item_bg"
-                    android:gravity="center_vertical"
-                    android:padding="12dp"
-                    android:layout_marginTop="10dp">
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bk_avatar_bg" />
 
-                    <View
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/bk_avatar_bg"
-                        android:layout_marginEnd="12dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Casilao"
+                    android:textColor="@color/bk_text_dark"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dr. Casilao"
-                        android:textColor="@color/bk_text_dark"
-                        android:textSize="14sp"/>
-                </LinearLayout>
+            <LinearLayout
+                android:id="@+id/bk_item3"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bk_item_bg"
+                android:gravity="center_vertical"
+                android:padding="12dp">
 
-                <!-- Item 3 -->
-                <LinearLayout
-                    android:id="@+id/bk_item3"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@drawable/bk_item_bg"
-                    android:gravity="center_vertical"
-                    android:padding="12dp"
-                    android:layout_marginTop="10dp">
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/bk_avatar_bg" />
 
-                    <View
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/bk_avatar_bg"
-                        android:layout_marginEnd="12dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dr. Casilao"
-                        android:textColor="@color/bk_text_dark"
-                        android:textSize="14sp"/>
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Casilao"
+                    android:textColor="@color/bk_text_dark"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -167,23 +150,15 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bk_btn_continue"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:text="@string/bk_continue"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        app:cornerRadius="24dp"
         app:backgroundTint="@color/bk_brown"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toTopOf="@id/nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/nav"/>
-
-    <include
-        android:id="@+id/nav"
-        layout="@layout/navbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="12dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

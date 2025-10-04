@@ -6,10 +6,16 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
-class BkDateTimeFragment : Fragment(R.layout.bk_fragment_datetime) {
+class SettingsFragment : Fragment(R.layout.activity_settings) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setup navbar buttons
+        setupNavbar(view)
+    }
+
+    private fun setupNavbar(view: View) {
         view.findViewById<Button>(R.id.homeTab)?.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
@@ -22,10 +28,6 @@ class BkDateTimeFragment : Fragment(R.layout.bk_fragment_datetime) {
             findNavController().navigate(R.id.petListFragment)
         }
 
-        view.findViewById<Button>(R.id.bk_btn_continue)?.setOnClickListener {
-            findNavController().navigate(R.id.bkServiceTypeFragment)
-        }
-
         view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
         }
@@ -33,7 +35,5 @@ class BkDateTimeFragment : Fragment(R.layout.bk_fragment_datetime) {
         view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
             findNavController().navigate(R.id.notisFragment)
         }
-
     }
-
 }
