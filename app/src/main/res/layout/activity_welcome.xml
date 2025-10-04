@@ -23,7 +23,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_register"
         android:layout_width="291dp"
-        android:layout_height="44dp"
+        android:layout_height="44.13dp"
         android:layout_marginTop="140dp"
         android:text="@string/register"
         android:textAllCaps="false"
@@ -37,12 +37,12 @@
         android:id="@+id/button_login"
         android:layout_width="291dp"
         android:layout_height="44dp"
-        android:layout_marginTop="16dp"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textStyle="bold"
         android:textSize="17sp"
-        android:textColor="@android:color/white"
+        android:textColor="#ffff"
+        android:layout_marginTop="1.87dp"
         app:cornerRadius="29dp"
         app:backgroundTint="@color/orange"/>
 

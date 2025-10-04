@@ -6,8 +6,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
-class HomeFragment : Fragment(R.layout.home) {
-
+class BkDateTimeFragment : Fragment(R.layout.bk_fragment_datetime) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -23,6 +22,10 @@ class HomeFragment : Fragment(R.layout.home) {
             findNavController().navigate(R.id.petListFragment)
         }
 
+        view.findViewById<Button>(R.id.bk_btn_continue)?.setOnClickListener {
+            findNavController().navigate(R.id.bkServiceTypeFragment)
+        }
+
         view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
         }
@@ -32,6 +35,5 @@ class HomeFragment : Fragment(R.layout.home) {
         }
 
     }
-
 
 }

@@ -5,9 +5,9 @@ import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 
-class HomeFragment : Fragment(R.layout.home) {
-
+class AddPetTypeFragment : Fragment(R.layout.add_pet_type) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -23,6 +23,14 @@ class HomeFragment : Fragment(R.layout.home) {
             findNavController().navigate(R.id.petListFragment)
         }
 
+        view.findViewById<Button>(R.id.nextBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.addPetNameFragment)
+        }
+
+        view.findViewById<Button>(R.id.backBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.petListFragment)
+        }
+
         view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
         }
@@ -31,7 +39,11 @@ class HomeFragment : Fragment(R.layout.home) {
             findNavController().navigate(R.id.notisFragment)
         }
 
-    }
 
+
+
+
+
+    }
 
 }

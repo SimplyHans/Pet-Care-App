@@ -1,65 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D8CCC8">
 
+    <!-- Top Rounded Background -->
     <View
         android:id="@+id/viewBG_top"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:background="@drawable/bg_header_panel"
+        android:background="@drawable/rounded_background"
         android:backgroundTint="#EFE6E2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Title -->
     <TextView
         android:id="@+id/title"
-        android:layout_width="141dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="96dp"
-        android:text="@string/petcare_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="PetCare App"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/viewBG_top"
-        app:layout_constraintEnd_toStartOf="@+id/notisBtn"
-        app:layout_constraintHorizontal_bias="0.192"
-        app:layout_constraintStart_toStartOf="@+id/viewBG_top"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/notisBtn"
-        android:layout_width="33dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="308dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="14dp"
-        android:backgroundTint="#5B4239"
-        app:layout_constraintBottom_toBottomOf="@+id/viewBG_top"
         app:layout_constraintStart_toStartOf="@+id/viewBG_top"
         app:layout_constraintTop_toTopOf="@+id/viewBG_top"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.5" />
 
-    <Button
-        android:id="@+id/settingsBtn"
-        android:layout_width="33dp"
+    <!-- Notifications: brown circle container -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/notisBtn"
+        android:layout_width="42dp"
         android:layout_height="42dp"
-        android:backgroundTint="#5B4239"
+        app:cardCornerRadius="21dp"
+        app:cardBackgroundColor="#5B4239"
+        app:cardUseCompatPadding="false"
+        app:cardPreventCornerOverlap="false"
+        app:strokeWidth="0dp"
+        app:cardElevation="0dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toTopOf="@+id/viewBG_top"
         app:layout_constraintBottom_toBottomOf="@+id/viewBG_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.277"
-        app:layout_constraintStart_toEndOf="@+id/notisBtn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73" />
+        app:layout_constraintEnd_toStartOf="@+id/settingsBtn"
+        android:layout_marginEnd="8dp">
 
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:src="@drawable/bk_ic_bell"
+            android:tint="@android:color/white"
+            android:contentDescription="Notifications" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Settings: brown circle container -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/settingsBtn"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:cardCornerRadius="21dp"
+        app:cardBackgroundColor="#5B4239"
+        app:cardUseCompatPadding="false"
+        app:cardPreventCornerOverlap="false"
+        app:strokeWidth="0dp"
+        app:cardElevation="0dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toTopOf="@+id/viewBG_top"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBG_top"
+        app:layout_constraintEnd_toEndOf="@+id/viewBG_top"
+        android:layout_marginEnd="12dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:contentDescription="Settings"
+            android:src="@drawable/bk_ic_settings"
+            android:tint="@android:color/white" />
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D8CCC8"
+    tools:context=".PetListFragment">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/pet_buttons_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="#EDE5E1"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_AddPet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Add Pet"
+                android:textSize="25dp"
+                app:backgroundTint="#403933"
+                app:cornerRadius="24dp"
+                app:icon="@drawable/plus"
+                app:iconGravity="textStart"
+                app:iconPadding="15dp"
+                app:iconSize="35dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_pet02"
+                    android:layout_width="0dp"
+                    android:layout_height="144dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:text="Bud"
+                    app:backgroundTint="#AE37D1"
+                    app:cornerRadius="24dp"
+                    app:iconSize="30dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_pet01"
+                    android:layout_width="0dp"
+                    android:layout_height="144dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Fido"
+                    app:backgroundTint="#5C96DB"
+                    app:cornerRadius="24dp"
+                    app:iconSize="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_pet03"
+                    android:layout_width="0dp"
+                    android:layout_height="144dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:text="Cleo"
+                    app:backgroundTint="#B86F31"
+                    app:cornerRadius="24dp"
+                    app:iconSize="30dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_pet04"
+                    android:layout_width="0dp"
+                    android:layout_height="144dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Spot"
+                    app:backgroundTint="#E26488"
+                    app:cornerRadius="24dp"
+                    app:iconSize="30dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <include
+        android:id="@+id/nav"
+        layout="@layout/navbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

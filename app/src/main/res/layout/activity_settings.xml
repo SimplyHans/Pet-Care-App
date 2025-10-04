@@ -71,6 +71,7 @@ android:layout_width="match_parent"
 android:layout_height="0dp"
 android:layout_weight="1"
 android:layout_marginTop="16dp"
+android:layout_marginBottom="80dp"
 android:background="@drawable/top_rounded_bg">
 
 <LinearLayout
@@ -105,34 +106,13 @@ android:background="@drawable/top_rounded_bg">
         app:cornerRadius="24dp"
         app:backgroundTint="#584239"/>
 </LinearLayout>
-</FrameLayout>
+    </FrameLayout>
 
+    <include
+        android:id="@+id/nav"
+        layout="@layout/navbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"/>
 
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="56dp"
-android:orientation="vertical"
-android:background="#EFE6E2">
-
-
-<View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/black"/>
-
-
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1">
-
-    <View
-        android:layout_width="65dp"
-        android:layout_height="33dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/footer_pill"
-        android:layout_marginStart="26dp"/>
-</FrameLayout>
 </LinearLayout>
-
-    </LinearLayout>
