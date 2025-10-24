@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="@+id/bg" />
 
     <Button
-        android:id="@+id/acceptBtn"
+        android:id="@+id/tagType"
         android:layout_width="118dp"
         android:layout_height="34dp"
         android:layout_marginStart="40dp"
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/bg"
         app:layout_constraintEnd_toEndOf="@+id/bg"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toEndOf="@+id/acceptBtn"
+        app:layout_constraintStart_toEndOf="@+id/tagType"
         app:layout_constraintTop_toTopOf="@+id/bg"
         app:layout_constraintVertical_bias="0.934" />
 
