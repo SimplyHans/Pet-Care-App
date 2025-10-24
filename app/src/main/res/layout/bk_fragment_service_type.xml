@@ -63,7 +63,6 @@
                     android:layout_height="22dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/bk_avatar_bg" />
-
             </LinearLayout>
 
             <!-- Title -->
@@ -83,52 +82,92 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp" />
 
-            <!-- Two selectable 'card buttons' -->
+            <!-- ===================== REPLACED SECTION START ===================== -->
+            <!-- Row 1: Walking + Grooming -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <!-- Services (button styled like your sample) -->
-
-                <!-- Vets -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/card_services"
-                    android:layout_width="125dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:backgroundTint="#D57E5F"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:text="Services"
-                    android:textAllCaps="false"
-                    android:textColor="@color/bk_text_dark"
-                    android:textStyle="bold"
-                    app:cornerRadius="15dp" />
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/card_vets"
-                    android:layout_width="130dp"
+                    android:id="@+id/bk_service_walking"
+                    android:layout_width="0dp"
                     android:layout_height="140dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginBottom="4dp"
-                    android:backgroundTint="#D57E5F"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:text="Vets"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Walking"
                     android:textAllCaps="false"
-                    android:textColor="@color/bk_text_dark"
                     android:textStyle="bold"
-                    app:cornerRadius="15dp" />
+                    android:textColor="@color/bk_text_dark"
+                    android:checkable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cornerRadius="15dp"
+                    app:backgroundTint="#D57E5F" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bk_service_grooming"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Grooming"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="@color/bk_text_dark"
+                    android:checkable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cornerRadius="15dp"
+                    app:backgroundTint="#D57E5F" />
             </LinearLayout>
+
+            <!-- Row 2: Vet Visit + Boarding -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bk_service_vet"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Vet Visit"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="@color/bk_text_dark"
+                    android:checkable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cornerRadius="15dp"
+                    app:backgroundTint="#D57E5F" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bk_service_boarding"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Boarding"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="@color/bk_text_dark"
+                    android:checkable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cornerRadius="15dp"
+                    app:backgroundTint="#D57E5F" />
+            </LinearLayout>
+            <!-- ====================== REPLACED SECTION END ====================== -->
 
             <!-- Push content up to keep air above the button -->
             <Space
-                android:layout_width="346dp"
-                android:layout_height="172dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -158,5 +197,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

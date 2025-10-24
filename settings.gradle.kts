@@ -10,7 +10,11 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        id("androidx.navigation.safeargs.kotlin") version "2.8.3"
+    }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,4 +25,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "PetCareApp"
 include(":app")
- 
