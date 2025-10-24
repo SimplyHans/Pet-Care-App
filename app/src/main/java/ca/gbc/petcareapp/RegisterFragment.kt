@@ -2,24 +2,74 @@ package ca.gbc.petcareapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import ca.gbc.petcareapp.auth.presentation.AuthResult
+import ca.gbc.petcareapp.auth.presentation.AuthViewModel
+import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.flow.collectLatest
 
 class RegisterFragment : Fragment(R.layout.activity_register) {
+    private val vm: AuthViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Back button navigates to WelcomeFragment
-        val backBtn = view.findViewById<ImageButton>(R.id.button_back)
-        backBtn?.setOnClickListener {
-            findNavController().navigate(R.id.welcomeFragment)
+        val backBtn     = view.findViewById<ImageButton>(R.id.button_back)
+        val fullNameEt  = view.findViewById<EditText>(R.id.editTextTextEmailAddress3) // Name
+        val emailEt     = view.findViewById<EditText>(R.id.editTextTextEmailAddress2) // Email
+        val passwordEt  = view.findViewById<EditText>(R.id.editTextTextPassword)
+        val confirmEt   = view.findViewById<EditText>(R.id.editTextTextPassword2)
+        val registerBtn = view.findViewById<MaterialButton>(R.id.button_login)        // "Register" button
+
+        backBtn?.setOnClickListener { findNavController().navigate(R.id.welcomeFragment) }
+
+        registerBtn?.setOnClickListener {
+            val fullName = fullNameEt.text?.toString()?.trim().orEmpty()
+            val email    = emailEt.text?.toString()?.trim().orEmpty()
+            val pass     = passwordEt.text?.toString().orEmpty()
+            val confirm  = confirmEt.text?.toString().orEmpty()
+
+            when {
+                fullName.isEmpty() -> {
+                    Toast.makeText(requireContext(), "Please enter your name", Toast.LENGTH_SHORT).show(); return@setOnClickListener
+                }
+                email.isEmpty() || !email.contains("@") -> {
+                    Toast.makeText(requireContext(), "Please enter a valid email", Toast.LENGTH_SHORT).show(); return@setOnClickListener
+                }
+                pass.length < 6 -> {
+                    Toast.makeText(requireContext(), "Password must be at least 6 characters", Toast.LENGTH_SHORT).show(); return@setOnClickListener
+                }
+                pass != confirm -> {
+                    Toast.makeText(requireContext(), "Passwords do not match", Toast.LENGTH_SHORT).show(); return@setOnClickListener
+                }
+            }
+
+            registerBtn.isEnabled = false
+            vm.register(fullName, email, pass)
         }
 
-        view.findViewById<Button>(R.id.button_login)?.setOnClickListener {
-            findNavController().navigate(R.id.loginFragment)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            vm.authState.collectLatest { state ->
+                when (state) {
+                    is AuthResult.Success -> {
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.homeFragment) // destination ID
+                        registerBtn?.isEnabled = true
+                    }
+                    is AuthResult.Error -> {
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                        registerBtn?.isEnabled = true
+                    }
+                    AuthResult.Loading -> registerBtn?.isEnabled = false
+                    AuthResult.Idle -> registerBtn?.isEnabled = true
+                }
+            }
         }
     }
-    }
-
+}

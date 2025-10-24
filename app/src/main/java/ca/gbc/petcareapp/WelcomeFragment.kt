@@ -10,14 +10,11 @@ class WelcomeFragment : Fragment(R.layout.activity_welcome) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val btnRegister = view.findViewById<Button>(R.id.button_register)
+        val btnLogin    = view.findViewById<Button>(R.id.button_login)
 
-        view.findViewById<Button>(R.id.button_login)?.setOnClickListener {
-            findNavController().navigate(R.id.action_welcome_to_login)
-        }
 
-        view.findViewById<Button>(R.id.button_register)?.setOnClickListener {
-            findNavController().navigate(R.id.action_welcome_to_register)
-        }
-
+        btnRegister?.setOnClickListener { findNavController().navigate(R.id.registerFragment) }
+        btnLogin?.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
     }
 }
