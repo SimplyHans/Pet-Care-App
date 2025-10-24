@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bk_nav_graph"
-    app:startDestination="@id/bkCaregiverPickerFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/booking_graph"
+    app:startDestination="@id/bookCaregiverPickerFragment">
 
     <fragment
-        android:id="@+id/bkCaregiverPickerFragment"
-        android:name="ca.gbc.petcareapp.feature.booking.BkCaregiverPickerFragment"
-        android:label="Caregiver Picker">
+        android:id="@+id/bookCaregiverPickerFragment"
+        android:name="ca.gbc.petcareapp.BkCaregiverPickerFragment"
+        android:label="Book Caregiver"
+        tools:layout="@layout/bk_fragment_caregiver_picker">
+
+        <!-- Caregiver -> DateTime -->
         <action
-            android:id="@+id/action_bkCaregiverPicker_to_bkDateTime"
+            android:id="@+id/action_bookCaregiverPickerFragment_to_bkDateTimeFragment"
             app:destination="@id/bkDateTimeFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/bkDateTimeFragment"
-        android:name="ca.gbc.petcareapp.feature.booking.BkDateTimeFragment"
-        android:label="Date/Time">
+        android:name="ca.gbc.petcareapp.BkDateTimeFragment"
+        android:label="Book Date &amp; Time"
+        tools:layout="@layout/bk_fragment_datetime">
+
+        <!-- DateTime -> Service Type -->
         <action
-            android:id="@+id/action_bkDateTime_to_bkServiceType"
+            android:id="@+id/action_bkDateTimeFragment_to_bkServiceTypeFragment"
             app:destination="@id/bkServiceTypeFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/bkServiceTypeFragment"
-        android:name="ca.gbc.petcareapp.feature.booking.BkServiceTypeFragment"
-        android:label="Service Type" />
+        android:name="ca.gbc.petcareapp.BkServiceTypeFragment"
+        android:label="Book Service"
+        tools:layout="@layout/bk_fragment_service_type" />
 </navigation>
