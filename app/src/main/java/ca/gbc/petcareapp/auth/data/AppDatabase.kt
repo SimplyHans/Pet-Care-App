@@ -5,12 +5,18 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(
+    entities = [User::class, Pet::class], // ✅ Include both tables
+    version = 2, // ✅ Increment version since schema changed
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun petDao(): PetDao // ✅ Add Pet DAO
 
     companion object {
-        @Volatile private var INSTANCE: AppDatabase? = null
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
 
         fun get(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
@@ -18,7 +24,10 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "petcare.db"
-                ).fallbackToDestructiveMigration().build().also { INSTANCE = it }
+                )
+                    .fallbackToDestructiveMigration() // ✅ Automatically reset if structure changes
+                    .build()
+                    .also { INSTANCE = it }
             }
     }
 }
