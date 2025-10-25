@@ -12,6 +12,7 @@ class BkServiceTypeFragment : Fragment(R.layout.bk_fragment_service_type) {
 
     // Shared VM across booking steps
     private val bookingVM: BookingViewModel by activityViewModels()
+    private val notificationsVM: NotificationsViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,13 +66,19 @@ class BkServiceTypeFragment : Fragment(R.layout.bk_fragment_service_type) {
         btnContinue?.isEnabled = bookingVM.booking.value.serviceType != null
 
         // ---- Choose where Continue goes ----
-        // Preferred flow: Service -> DateTime -> Caregiver
+        // Preferred flow: Service -> Add notification -> Go Home or Confirmation
         btnContinue?.setOnClickListener {
-            // If your nav graph ID is bkDateTimeFragment, use this:
-            findNavController().navigate(R.id.bkDateTimeFragment)
+            val booking = bookingVM.booking.value
+            if (booking.isComplete) {
+                // Add booking to notifications
+                notificationsVM.addBookingNotification(booking)
+            }
 
-            // If you truly want to skip date/time and go straight to caregiver, use:
-            // findNavController().navigate(R.id.bookCaregiverPickerFragment)
+            // Optionally reset the booking for next appointment
+            bookingVM.reset()
+
+            // Navigate to Home or Confirmation screen
+            findNavController().navigate(R.id.homeFragment)
         }
     }
 }
