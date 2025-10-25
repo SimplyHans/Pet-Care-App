@@ -1,4 +1,4 @@
-package ca.gbc.petcareapp.auth.data
+package ca.gbc.petcareapp.pets
 
 import androidx.room.*
 

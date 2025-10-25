@@ -3,7 +3,6 @@ package ca.gbc.petcareapp.pets
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.gbc.petcareapp.auth.data.AppDatabase
-import ca.gbc.petcareapp.auth.data.Pet
 import kotlinx.coroutines.launch
 
 class PetViewModel(private val db: AppDatabase) : ViewModel() {

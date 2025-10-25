@@ -4,15 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ca.gbc.petcareapp.pets.Pet        // ✅ Import Pet entity
+import ca.gbc.petcareapp.pets.PetDao     // ✅ Import PetDao
 
 @Database(
-    entities = [User::class, Pet::class], // ✅ Include both tables
-    version = 2, // ✅ Increment version since schema changed
+    entities = [User::class, Pet::class], // Include both tables
+    version = 2,                          // Increment version since schema changed
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
-    abstract fun petDao(): PetDao // ✅ Add Pet DAO
+    abstract fun petDao(): PetDao  // Add Pet DAO
 
     companion object {
         @Volatile
@@ -25,7 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "petcare.db"
                 )
-                    .fallbackToDestructiveMigration() // ✅ Automatically reset if structure changes
+                    .fallbackToDestructiveMigration() // Automatically reset if structure changes
                     .build()
                     .also { INSTANCE = it }
             }

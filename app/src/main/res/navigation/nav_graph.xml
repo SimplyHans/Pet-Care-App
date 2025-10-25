@@ -79,7 +79,13 @@
         <action
             android:id="@+id/action_petListFragment_to_addPetTypeFragment"
             app:destination="@id/addPetTypeFragment" />
+
+        <!-- Add this action -->
+        <action
+            android:id="@+id/action_petListFragment_to_petProfileFragment"
+            app:destination="@id/petProfileFragment" />
     </fragment>
+
 
     <!--Pets Page-->
     <fragment
@@ -112,5 +118,10 @@
         android:label="Add Pet Details"
         tools:layout="@layout/add_pet_details">
     </fragment>
+    <fragment
+    android:id="@+id/petProfileFragment"
+    android:name="ca.gbc.petcareapp.PetProfileFragment"
+    android:label="Pet Profile"
+    tools:layout="@layout/pet_profile" />
 
 </navigation>
