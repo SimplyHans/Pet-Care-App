@@ -54,7 +54,7 @@ app:contentPadding="12dp">
             android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/profile_subtitle"
+            android:id="@+id/amo_pets"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0 pets"

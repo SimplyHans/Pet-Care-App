@@ -7,25 +7,32 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import ca.gbc.petcareapp.auth.data.AppDatabase
 import ca.gbc.petcareapp.auth.session.SessionManager
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment(R.layout.activity_settings) {
 
     private lateinit var sessionManager: SessionManager
+    private lateinit var db: AppDatabase
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize session manager
+        // Initialize session manager and database
         sessionManager = SessionManager(requireContext())
+        db = AppDatabase.get(requireContext())
 
         // Setup navbar buttons
         setupNavbar(view)
         
         // Update profile name based on logged-in user
         updateProfileName(view)
+        
+        // Update pet count
+        updatePetCount(view)
         
         // Setup role switching button
         setupRoleSwitching(view)
@@ -70,6 +77,27 @@ class SettingsFragment : Fragment(R.layout.activity_settings) {
                 }
             }
         }
+    }
+
+    private fun updatePetCount(view: View) {
+        val amoPetsTextView = view.findViewById<TextView>(R.id.amo_pets)
+        
+        lifecycleScope.launch {
+            val session = sessionManager.sessionFlow.first()
+            if (session.isLoggedIn) {
+                val pets = db.petDao().getPetsForUser(session.userId)
+                val petCount = pets.size
+                amoPetsTextView.text = if (petCount == 1) "1 pet" else "$petCount pets"
+            } else {
+                amoPetsTextView.text = "0 pets"
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh pet count when returning to settings
+        view?.let { updatePetCount(it) }
     }
 
     private fun setupRoleSwitching(view: View) {
