@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Force-generate these action IDs in R -->
+    <item name="action_bookCaregiverPickerFragment_to_bkDateTimeFragment" type="id"/>
+    <item name="action_bkDateTimeFragment_to_bkServiceTypeFragment" type="id"/>
+</resources>

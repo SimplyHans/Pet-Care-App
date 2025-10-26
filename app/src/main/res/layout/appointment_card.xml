@@ -44,7 +44,7 @@
         app:layout_constraintStart_toStartOf="@+id/bg" />
 
     <Button
-        android:id="@+id/tagTwo"
+        android:id="@+id/tagApoint"
         android:layout_width="64dp"
         android:layout_height="28dp"
         android:layout_marginStart="8dp"
@@ -55,12 +55,12 @@
         app:layout_constraintBottom_toBottomOf="@id/bg"
         app:layout_constraintEnd_toEndOf="@id/desc"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/acceptBtn"
+        app:layout_constraintStart_toEndOf="@id/tagType"
         app:layout_constraintTop_toTopOf="@+id/bg"
         app:layout_constraintVertical_bias="0.951" />
 
     <Button
-        android:id="@+id/acceptBtn"
+        android:id="@+id/tagType"
         android:layout_width="59dp"
         android:layout_height="28dp"
         android:layout_marginStart="28dp"

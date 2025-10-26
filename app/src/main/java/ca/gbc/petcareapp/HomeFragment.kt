@@ -23,6 +23,10 @@ class HomeFragment : Fragment(R.layout.home) {
             findNavController().navigate(R.id.petListFragment)
         }
 
+        view.findViewById<Button>(R.id.viewPetsBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.petListFragment)
+        }
+
         view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
         }

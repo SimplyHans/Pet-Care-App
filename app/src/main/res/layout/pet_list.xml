@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +8,7 @@
     android:background="#D8CCC8"
     tools:context=".PetListFragment">
 
+    <!-- Header include -->
     <include
         android:id="@+id/header"
         layout="@layout/header"
@@ -17,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
+    <!-- Card for Add Pet button + pets grid -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/pet_buttons_card"
         android:layout_width="0dp"
@@ -26,18 +28,18 @@
         app:cardBackgroundColor="#EDE5E1"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/nav"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header">
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nav">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Add Pet Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_AddPet"
                 android:layout_width="match_parent"
@@ -52,69 +54,20 @@
                 app:iconPadding="15dp"
                 app:iconSize="35dp" />
 
-            <LinearLayout
+            <!-- RecyclerView for pets -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_pets"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_pet02"
-                    android:layout_width="0dp"
-                    android:layout_height="144dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:text="Bud"
-                    app:backgroundTint="#AE37D1"
-                    app:cornerRadius="24dp"
-                    app:iconSize="30dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_pet01"
-                    android:layout_width="0dp"
-                    android:layout_height="144dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:text="Fido"
-                    app:backgroundTint="#5C96DB"
-                    app:cornerRadius="24dp"
-                    app:iconSize="30dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_pet03"
-                    android:layout_width="0dp"
-                    android:layout_height="144dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:text="Cleo"
-                    app:backgroundTint="#B86F31"
-                    app:cornerRadius="24dp"
-                    app:iconSize="30dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_pet04"
-                    android:layout_width="0dp"
-                    android:layout_height="144dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:text="Spot"
-                    app:backgroundTint="#E26488"
-                    app:cornerRadius="24dp"
-                    app:iconSize="30dp" />
-            </LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:padding="4dp" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Navigation bar include -->
     <include
         android:id="@+id/nav"
         layout="@layout/navbar"

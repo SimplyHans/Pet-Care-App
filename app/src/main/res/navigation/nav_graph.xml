@@ -2,6 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/welcomeFragment">
     <!--Authentication Pages-->
     <fragment
@@ -48,21 +49,29 @@
     <fragment
         android:id="@+id/notisFragment"
         android:name="ca.gbc.petcareapp.NotisFragment"
-        android:label="Settings"
+        android:label="Notifications"
         tools:layout="@layout/notifications" />
 
-    <!--Book Pages-->
+    <!-- Booking flow -->
     <fragment
         android:id="@+id/bookCaregiverPickerFragment"
         android:name="ca.gbc.petcareapp.BkCaregiverPickerFragment"
         android:label="Book Caregiver"
-        tools:layout="@layout/bk_fragment_caregiver_picker" />
+        tools:layout="@layout/bk_fragment_caregiver_picker">
+        <action
+            android:id="@+id/action_bookCaregiverPickerFragment_to_bkDateTimeFragment"
+            app:destination="@id/bkDateTimeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/bkDateTimeFragment"
         android:name="ca.gbc.petcareapp.BkDateTimeFragment"
-        android:label="Book Date Time"
-        tools:layout="@layout/bk_fragment_datetime" />
+        android:label="Book Date &amp; Time"
+        tools:layout="@layout/bk_fragment_datetime">
+        <action
+            android:id="@+id/action_bkDateTimeFragment_to_bkServiceTypeFragment"
+            app:destination="@id/bkServiceTypeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/bkServiceTypeFragment"
@@ -79,7 +88,12 @@
         <action
             android:id="@+id/action_petListFragment_to_addPetTypeFragment"
             app:destination="@id/addPetTypeFragment" />
+
+        <action
+            android:id="@+id/action_petListFragment_to_petProfileFragment"
+            app:destination="@id/petProfileFragment" />
     </fragment>
+
 
     <!--Pets Page-->
     <fragment
@@ -112,5 +126,10 @@
         android:label="Add Pet Details"
         tools:layout="@layout/add_pet_details">
     </fragment>
+    <fragment
+    android:id="@+id/petProfileFragment"
+    android:name="ca.gbc.petcareapp.PetProfileFragment"
+    android:label="Pet Profile"
+    tools:layout="@layout/pet_profile" />
 
 </navigation>

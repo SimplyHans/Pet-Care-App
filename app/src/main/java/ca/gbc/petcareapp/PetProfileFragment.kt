@@ -1,59 +1,103 @@
 package ca.gbc.petcareapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
+import android.widget.TextView
+import androidx.navigation.fragment.findNavController
+import ca.gbc.petcareapp.auth.data.AppDatabase
+import ca.gbc.petcareapp.auth.session.SessionManager
+import ca.gbc.petcareapp.pets.PetViewModel
+import ca.gbc.petcareapp.pets.PetViewModelFactory
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class PetProfileFragment : Fragment(R.layout.pet_profile) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PetProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PetProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var petId: Long = 0
+    private var petName: String? = null
+    private var breed: String? = null
+    private var age: Int = 0
+    private var description: String? = null
+    private var petType: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private lateinit var db: AppDatabase
+    private lateinit var viewModel: PetViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        db = AppDatabase.get(requireContext())
+        val factory = PetViewModelFactory(db)
+        viewModel = ViewModelProvider(requireActivity(), factory)[PetViewModel::class.java]
+
+        // Get arguments from navigation
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            petId = it.getLong("petId")
+            petName = it.getString("petName")
+            breed = it.getString("breed")
+            age = it.getInt("age")
+            description = it.getString("description")
+            petType = it.getString("petType")
+        }
+
+        val nameView = view.findViewById<TextView>(R.id.PetName)
+        val breedInput = view.findViewById<TextInputEditText>(R.id.breedInput)
+        val ageInput = view.findViewById<TextInputEditText>(R.id.ageInput)
+        val descInput = view.findViewById<TextInputEditText>(R.id.nameInput)
+
+        val editBtn = view.findViewById<MaterialButton>(R.id.editBtn)
+        val delBtn = view.findViewById<MaterialButton>(R.id.savePetBtn)
+
+        nameView.text = petName
+        breedInput.setText(breed)
+        ageInput.setText(age.toString())
+        descInput.setText(description)
+
+        val sessionManager = SessionManager(requireContext())
+
+        // ✅ EDIT BUTTON → start edit flow (same as Add Pet)
+        editBtn.setOnClickListener {
+            lifecycleScope.launch {
+                val session = sessionManager.sessionFlow.first()
+                val userId = session.userId
+
+                // Store data in ViewModel
+                viewModel.petType = petType
+                viewModel.petName = petName
+                viewModel.breed = breed
+                viewModel.age = age
+                viewModel.desc = description
+
+                // Set a temporary property to know we’re editing this pet
+                viewModel.currentEditingPetId = petId
+                viewModel.currentUserId = userId
+
+                // Navigate to AddPetTypeFragment (reuse add flow)
+                findNavController().navigate(R.id.addPetTypeFragment)
+            }
+        }
+
+        // ✅ DELETE button
+        delBtn.setOnClickListener {
+            deletePetAndGoBack()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.pet_profile, container, false)
-    }
+    private fun deletePetAndGoBack() {
+        val sessionManager = SessionManager(requireContext())
+        lifecycleScope.launch {
+            val session = sessionManager.sessionFlow.first()
+            val userId = session.userId
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PetProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PetProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+            val pet = db.petDao().getPetsForUser(userId).firstOrNull { it.id == petId }
+            pet?.let { db.petDao().delete(it) }
+
+            findNavController().navigateUp()
+        }
     }
 }

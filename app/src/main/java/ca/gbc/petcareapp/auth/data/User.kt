@@ -15,5 +15,6 @@ data class User(
     @ColumnInfo(collate = ColumnInfo.NOCASE) val email: String,
     val passwordHash: String,
     val salt: String,
+    val role: String = "consumer",
     val createdAt: Long = System.currentTimeMillis()
 )

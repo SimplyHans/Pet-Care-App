@@ -17,7 +17,8 @@ private val Context.dataStore by preferencesDataStore(name = "session_prefs")
 data class SessionState(
     val isLoggedIn: Boolean = false,
     val userId: Long = 0L,
-    val fullName: String = ""
+    val fullName: String = "",
+    val currentRole: String = "consumer"
 )
 
 
@@ -26,6 +27,7 @@ class SessionManager(private val context: Context) {
         val LOGGED_IN = booleanPreferencesKey("logged_in")
         val USER_ID = longPreferencesKey("user_id")
         val FULL_NAME = stringPreferencesKey("full_name")
+        val CURRENT_ROLE = stringPreferencesKey("current_role")
     }
 
 
@@ -33,7 +35,8 @@ class SessionManager(private val context: Context) {
         SessionState(
             isLoggedIn = prefs[Keys.LOGGED_IN] ?: false,
             userId = prefs[Keys.USER_ID] ?: 0L,
-            fullName = prefs[Keys.FULL_NAME] ?: ""
+            fullName = prefs[Keys.FULL_NAME] ?: "",
+            currentRole = prefs[Keys.CURRENT_ROLE] ?: "consumer"
         )
     }
 
@@ -43,6 +46,7 @@ class SessionManager(private val context: Context) {
             prefs[Keys.LOGGED_IN] = true
             prefs[Keys.USER_ID] = userId
             prefs[Keys.FULL_NAME] = fullName
+            prefs[Keys.CURRENT_ROLE] = "consumer"
         }
     }
 
@@ -52,6 +56,15 @@ class SessionManager(private val context: Context) {
             prefs[Keys.LOGGED_IN] = false
             prefs[Keys.USER_ID] = 0L
             prefs[Keys.FULL_NAME] = ""
+            prefs[Keys.CURRENT_ROLE] = "consumer"
+        }
+    }
+
+    suspend fun switchRole() {
+        context.dataStore.edit { prefs ->
+            val currentRole = prefs[Keys.CURRENT_ROLE] ?: "consumer"
+            val newRole = if (currentRole == "consumer") "business" else "consumer"
+            prefs[Keys.CURRENT_ROLE] = newRole
         }
     }
 }

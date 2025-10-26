@@ -35,7 +35,10 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val result = repo.register(fullName, email, password)
             _authState.value = result.fold(
-                onSuccess = { AuthResult.Success("Account created. Welcome, ${it.fullName}!") },
+                onSuccess = { 
+                    session.setLoggedIn(it.id, it.fullName)
+                    AuthResult.Success("Account created. Welcome, ${it.fullName}!") 
+                },
                 onFailure = { AuthResult.Error(it.message ?: "Registration failed.") }
             )
         }

@@ -54,7 +54,7 @@
             android:layout_height="22dp"
             android:layout_gravity="center"
             android:src="@drawable/bk_ic_bell"
-            android:tint="@android:color/white"
+            app:tint="@android:color/white"
             android:contentDescription="Notifications" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -81,7 +81,7 @@
             android:layout_gravity="center"
             android:contentDescription="Settings"
             android:src="@drawable/bk_ic_settings"
-            android:tint="@android:color/white" />
+            app:tint="@android:color/white" />
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

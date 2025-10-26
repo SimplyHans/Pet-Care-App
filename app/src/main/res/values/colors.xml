@@ -4,4 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#E07040</color>
     <color name="input_bg_color">#ded1cc</color>
+    <color name="pet_color_1">#403933</color>
+    <color name="pet_color_2">#5C96DB</color>
+    <color name="pet_color_3">#AE37D1</color>
+    <color name="pet_color_4">#B86F31</color>
+
 </resources>
