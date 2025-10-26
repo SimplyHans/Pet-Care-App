@@ -15,8 +15,6 @@ data class NotificationItem(
 
 enum class NotificationType {
     BOOKING_CONFIRMED,
-    BOOKING_CANCELLED,
-    REMINDER,
     GENERAL
 }
 
