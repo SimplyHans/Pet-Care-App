@@ -4,21 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import ca.gbc.petcareapp.pets.Pet        // ✅ Import Pet entity
+import ca.gbc.petcareapp.pets.PetDao     // ✅ Import PetDao
 
-@Database(entities = [User::class], version = 2, exportSchema = false)
+@Database(
+    entities = [User::class, Pet::class], // Include both tables
+    version = 3,                          // Increment version since schema changed
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun petDao(): PetDao  // Add Pet DAO
 
     companion object {
-        @Volatile private var INSTANCE: AppDatabase? = null
-
-        private val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'consumer'")
-            }
-        }
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
 
         fun get(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
@@ -26,7 +26,10 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "petcare.db"
-                ).addMigrations(MIGRATION_1_2).build().also { INSTANCE = it }
+                )
+                    .fallbackToDestructiveMigration() // Automatically reset if structure changes
+                    .build()
+                    .also { INSTANCE = it }
             }
     }
 }

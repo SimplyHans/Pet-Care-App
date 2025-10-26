@@ -96,17 +96,18 @@
                 android:layout_width="126dp"
                 android:layout_height="49dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/rounded_background"
                 android:backgroundTint="#3C9F938D"
                 android:hint="Age here..."
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintHorizontal_bias="0.104"
                 app:layout_constraintStart_toEndOf="@id/ageText"
                 app:layout_constraintTop_toBottomOf="@id/breedInput" />
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameInput"
+                android:id="@+id/descInput"
                 android:layout_width="332dp"
                 android:layout_height="157dp"
                 android:layout_marginTop="4dp"
@@ -120,39 +121,23 @@
                 app:layout_constraintTop_toBottomOf="@id/ageInput" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/addPetBtn"
+                android:id="@+id/savePetBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="128dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Next"
+                android:text="Save"
                 android:textSize="20sp"
                 app:backgroundTint="#403933"
                 app:cornerRadius="24dp"
-                app:layout_constraintEnd_toStartOf="@id/skipBtn"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/nameInput" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/skipBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Skip"
-                android:textSize="20sp"
-                app:backgroundTint="#B1A293"
-                app:cornerRadius="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/addPetBtn"
-                app:layout_constraintTop_toBottomOf="@id/nameInput" />
+                app:layout_constraintTop_toBottomOf="@id/descInput" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/backBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="51dp"
+                android:layout_height="56dp"
                 android:layout_marginTop="16dp"
                 android:textSize="25sp"
                 app:backgroundTint="#403933"
