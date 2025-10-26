@@ -1,5 +1,7 @@
 package ca.gbc.petcareapp
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +38,33 @@ class AddPetTypeFragment : Fragment() {
         nextBtn = view.findViewById(R.id.nextBtn)
         backBtn = view.findViewById(R.id.backBtn)
 
+        // Radio button list for styling
+        val radioButtons = listOf(
+            view.findViewById<RadioButton>(R.id.petType),
+            view.findViewById<RadioButton>(R.id.petType2),
+            view.findViewById<RadioButton>(R.id.petType3),
+            view.findViewById<RadioButton>(R.id.petType4)
+        )
+
+        // Default style
+        radioButtons.forEach { button ->
+            button.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#E69C77"))
+            button.setTextColor(Color.BLACK)
+        }
+
+        // Change highlight on selection
+        petTypeGroup.setOnCheckedChangeListener { _, checkedId ->
+            radioButtons.forEach { button ->
+                if (button.id == checkedId) {
+                    button.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#b07070"))
+                    button.setTextColor(Color.WHITE)
+                } else {
+                    button.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#E69C77"))
+                    button.setTextColor(Color.BLACK)
+                }
+            }
+        }
+
         nextBtn.setOnClickListener {
             val selectedId = petTypeGroup.checkedRadioButtonId
             if (selectedId != -1) {
@@ -50,7 +79,7 @@ class AddPetTypeFragment : Fragment() {
         }
 
         backBtn.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(R.id.petListFragment)
         }
 
         return view
