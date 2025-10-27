@@ -4,21 +4,27 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ca.gbc.petcareapp.pets.Pet        // ✅ Import Pet entity
-import ca.gbc.petcareapp.pets.PetDao     // ✅ Import PetDao
+import androidx.room.TypeConverters
+import ca.gbc.petcareapp.data.Booking
+import ca.gbc.petcareapp.data.BookingDao
+import ca.gbc.petcareapp.data.Converters           // ← add this
+import ca.gbc.petcareapp.pets.Pet
+import ca.gbc.petcareapp.pets.PetDao
 
 @Database(
-    entities = [User::class, Pet::class], // Include both tables
-    version = 3,                          // Increment version since schema changed
+    entities = [User::class, Pet::class, Booking::class],
+    version = 4,                                   // ← bump after schema change
     exportSchema = false
 )
+@TypeConverters(Converters::class)                 // ← make Room use Instant converters
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun userDao(): UserDao
-    abstract fun petDao(): PetDao  // Add Pet DAO
+    abstract fun petDao(): PetDao
+    abstract fun BookingDao(): BookingDao          // ← lowerCamelCase
 
     companion object {
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
+        @Volatile private var INSTANCE: AppDatabase? = null
 
         fun get(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
@@ -27,7 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "petcare.db"
                 )
-                    .fallbackToDestructiveMigration() // Automatically reset if structure changes
+                    .fallbackToDestructiveMigration()
                     .build()
                     .also { INSTANCE = it }
             }

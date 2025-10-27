@@ -49,6 +49,8 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- The initial static includes can stay or be removed.
+                 The fragment code will add more cards below. -->
             <include
                 layout="@layout/notis_request_card"
                 android:layout_width="match_parent"
