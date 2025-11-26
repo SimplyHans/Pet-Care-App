@@ -17,24 +17,6 @@ class BkServiceTypeFragment : Fragment(R.layout.bk_fragment_service_type) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ----- Header / navbar you already had -----
-        view.findViewById<Button>(R.id.homeTab)?.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
-        }
-        view.findViewById<Button>(R.id.bookTab)?.setOnClickListener {
-            // If you want Book tab to land on this screen, leave it as is.
-            // Or jump straight to caregiver if that's your flow:
-            findNavController().navigate(R.id.bookCaregiverPickerFragment)
-        }
-        view.findViewById<Button>(R.id.petsTab)?.setOnClickListener {
-            findNavController().navigate(R.id.petListFragment)
-        }
-        view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.settingsFragment)
-        }
-        view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.notisFragment)
-        }
 
         // ----- Booking UI wiring -----
         val btnContinue = view.findViewById<MaterialButton>(R.id.bk_btn_continue)

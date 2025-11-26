@@ -15,22 +15,7 @@ class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ---- Header / Navbar ----
-        view.findViewById<Button>(R.id.homeTab)?.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
-        }
-        view.findViewById<Button>(R.id.bookTab)?.setOnClickListener {
-            findNavController().navigate(R.id.bkServiceTypeFragment)
-        }
-        view.findViewById<Button>(R.id.petsTab)?.setOnClickListener {
-            findNavController().navigate(R.id.petListFragment)
-        }
-        view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.settingsFragment)
-        }
-        view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.notisFragment)
-        }
+
 
         // ---- Caregiver choices (3 fixed rows in your XML) ----
         val row1 = view.findViewById<View>(R.id.bk_item1)

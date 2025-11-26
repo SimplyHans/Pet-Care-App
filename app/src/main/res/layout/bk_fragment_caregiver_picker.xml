@@ -4,42 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bk_surface">
+    android:background="@color/main">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <include
-        android:id="@+id/nav"
-        layout="@layout/navbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bk_panel"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         app:cardUseCompatPadding="false"
-        app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="@color/bk_panel"
-        app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toTopOf="@id/bk_btn_continue"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-
-
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,10 +119,10 @@
                     android:textColor="@color/bk_text_dark"
                     android:textSize="14sp" />
             </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <!-- Continue button -->
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bk_btn_continue"
         android:layout_width="0dp"
@@ -154,11 +130,12 @@
         android:text="@string/bk_continue"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        app:backgroundTint="@color/bk_brown"
+        app:backgroundTint="@color/secondary"
         app:cornerRadius="24dp"
-        app:layout_constraintBottom_toTopOf="@id/nav"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp"
         android:layout_marginBottom="12dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

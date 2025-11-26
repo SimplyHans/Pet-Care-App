@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#D8CCC8"
+        android:background="@color/main"
         tools:context=".PetProfileFragment">
 
         <include
@@ -18,164 +18,164 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/petProfileCard"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="8dp"
-            app:cardBackgroundColor="#EDE5E1"
-            app:layout_constraintTop_toBottomOf="@id/header"
-            app:layout_constraintBottom_toTopOf="@+id/nav"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/petProfileCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
 
-                <TextView
-                    android:id="@+id/PetName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="244dp"
-                    android:gravity="center"
-                    android:text="Pet Name"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/breedText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="52dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Breed:"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/PetName" />
+            <TextView
+                android:id="@+id/PetName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="244dp"
+                android:gravity="center"
+                android:text="Pet Name"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/breedInput"
-                    android:layout_width="0dp"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/rounded_background"
-                    android:backgroundTint="#3C9F938D"
-                    android:padding="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.338"
-                    app:layout_constraintStart_toEndOf="@id/breedText"
-                    app:layout_constraintTop_toBottomOf="@id/PetName"
-                    app:layout_constraintWidth_percent="0.5" />
+            <TextView
+                android:id="@+id/breedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="16dp"
+                android:text="Breed:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/PetName" />
 
-                <TextView
-                    android:id="@+id/ageText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Age:"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/breedText" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/breedInput"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="#3C9F938D"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.338"
+                app:layout_constraintStart_toEndOf="@id/breedText"
+                app:layout_constraintTop_toBottomOf="@id/PetName"
+                app:layout_constraintWidth_percent="0.5" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ageInput"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/rounded_background"
-                    android:backgroundTint="#3C9F938D"
-                    android:padding="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ageText"
-                    app:layout_constraintTop_toBottomOf="@id/breedInput"
-                    app:layout_constraintWidth_percent="0.3" />
+            <TextView
+                android:id="@+id/ageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="16dp"
+                android:text="Age:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/breedText" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameInput"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/rounded_background"
-                    android:backgroundTint="#3C9F938D"
-                    android:hint="Description here..."
-                    android:padding="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ageText" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ageInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="#3C9F938D"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ageText"
+                app:layout_constraintTop_toBottomOf="@id/breedInput"
+                app:layout_constraintWidth_percent="0.3" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/editBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="124dp"
-                    android:text="edit"
-                    android:textSize="20sp"
-                    app:backgroundTint="#403933"
-                    app:cornerRadius="24dp"
-                    app:iconGravity="textStart"
-                    app:iconPadding="8dp"
-                    app:iconSize="45dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/nameInput" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="#3C9F938D"
+                android:hint="Description here..."
+                android:layout_marginHorizontal="16dp"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ageText" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/backBtn"
-                    android:layout_width="60dp"
-                    android:layout_height="64dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="24dp"
-                    android:textSize="25sp"
-                    app:backgroundTint="#403933"
-                    app:cornerRadius="24dp"
-                    app:icon="@drawable/ic_arrow_back"
-                    app:iconGravity="textStart"
-                    app:iconPadding="8dp"
-                    app:iconSize="45dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Edit"
+                android:textSize="18sp"
+                android:paddingVertical="12dp"
+                app:backgroundTint="@color/secondary"
+                app:cornerRadius="24dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="24dp"
+                app:layout_constraintStart_toStartOf="@id/nameInput"
+                app:layout_constraintEnd_toEndOf="@id/nameInput"
+                app:layout_constraintTop_toBottomOf="@id/nameInput" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/savePetBtn"
-                    android:layout_width="71dp"
-                    android:layout_height="71dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="24dp"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    app:backgroundTint="#E69C77"
-                    app:cornerRadius="24dp"
-                    app:icon="@android:drawable/ic_menu_delete"
-                    app:iconGravity="top"
-                    app:iconPadding="8dp"
-                    app:iconSize="45dp"
-                    app:iconTint="#FFFFFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/backBtn"
+                android:layout_width="60dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:textSize="25sp"
+                app:backgroundTint="@color/secondary"
+                app:cornerRadius="24dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="45dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/nav"
-            layout="@layout/navbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/savePetBtn"
+                android:layout_width="71dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:backgroundTint="#E69C77"
+                app:cornerRadius="24dp"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconGravity="top"
+                app:iconPadding="8dp"
+                app:iconSize="45dp"
+                app:iconTint="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <include
+        android:id="@+id/nav"
+        layout="@layout/navbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,6 +54,14 @@
 
     <!-- Booking flow -->
     <fragment
+        android:id="@+id/bookListFragment"
+        android:name="ca.gbc.petcareapp.BookListFragment"
+        android:label="Appointments"
+        tools:layout="@layout/bk_list">
+    </fragment>
+
+
+    <fragment
         android:id="@+id/bookCaregiverPickerFragment"
         android:name="ca.gbc.petcareapp.BkCaregiverPickerFragment"
         android:label="Book Caregiver"
