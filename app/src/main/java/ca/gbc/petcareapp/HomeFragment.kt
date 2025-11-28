@@ -17,8 +17,12 @@ import ca.gbc.petcareapp.auth.data.AppDatabase
 import ca.gbc.petcareapp.auth.session.SessionManager
 import ca.gbc.petcareapp.data.BookingRepository
 import ca.gbc.petcareapp.data.Booking as DbBooking
+import ca.gbc.petcareapp.utils.NotificationBadgeHelper
+import androidx.fragment.app.activityViewModels
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -29,6 +33,16 @@ class HomeFragment : Fragment(R.layout.home) {
     private lateinit var sessionManager: SessionManager
     private lateinit var db: AppDatabase
     private lateinit var bookingRepository: BookingRepository
+    
+    // ViewModels for notifications
+    private val notificationsVM: NotificationsViewModel by activityViewModels()
+    private val bookingVM: BookingViewModel by activityViewModels()
+    
+    // Cache views to avoid repeated findViewById calls
+    private var petsContainer: LinearLayout? = null
+    private var appointmentsContainer: LinearLayout? = null
+    private var profileNameTextView: TextView? = null
+    private var lastPetsCount: Int = -1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -109,53 +123,93 @@ class HomeFragment : Fragment(R.layout.home) {
             findNavController().navigate(R.id.petListFragment)
             highlightNav(petsTab)
         }
-        // Staff card - navigate to booking flow (second card in second row)
+        // Staff card - navigate to staff list (second card in second row)
         val staffCard = secondRow?.getChildAt(1) as? View
         staffCard?.setOnClickListener {
-            findNavController().navigate(R.id.bkServiceTypeFragment)
+            findNavController().navigate(R.id.staffListFragment)
             highlightNav(bookTab)
         }
 
+        // Cache views
+        petsContainer = view.findViewById<LinearLayout>(R.id.petsContainer)
+        appointmentsContainer = view.findViewById<LinearLayout>(R.id.appointmentsContainer)
+        profileNameTextView = view.findViewById<TextView>(R.id.name_text)
+        
         // Load pets and bookings
         loadPets(view)
         loadBookings(view)
         
         updateProfileName(view)
+        
+        // Update notification badge (reuse header from above)
+        NotificationBadgeHelper.updateBadge(this, header, notificationsVM, bookingVM, bookingRepository)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Only refresh if view is available and data might have changed
+        view?.let { 
+            // Check if we need to reload (only if coming back from add pet flow)
+            if (lastPetsCount >= 0) {
+                lifecycleScope.launch {
+                    val session = sessionManager.sessionFlow.first()
+                    val userId = session.userId
+                    val currentPetsCount = withContext(Dispatchers.IO) {
+                        db.petDao().getPetsForUser(userId).size
+                    }
+                    if (currentPetsCount != lastPetsCount) {
+                        loadPets(it)
+                    }
+                }
+            }
+        }
     }
 
     private fun loadPets(view: View) {
         lifecycleScope.launch {
-            val session = sessionManager.sessionFlow.first()
+            val session = withContext(Dispatchers.IO) {
+                sessionManager.sessionFlow.first()
+            }
             val userId = session.userId
-            val pets = db.petDao().getPetsForUser(userId)
+            val pets = withContext(Dispatchers.IO) {
+                db.petDao().getPetsForUser(userId)
+            }
             
-            val petsContainer = view.findViewById<LinearLayout>(R.id.petsContainer)
-            // Remove all pet views except the "Add" button
+            lastPetsCount = pets.size
+            
+            val container = petsContainer ?: view.findViewById<LinearLayout>(R.id.petsContainer)
             val addButton = view.findViewById<View>(R.id.addPetButton)
-            petsContainer.removeAllViews()
+            
+            // Remove all pet views except the "Add" button
+            container.removeAllViews()
             if (addButton != null) {
-                petsContainer.addView(addButton)
+                container.addView(addButton)
+            }
+            
+            // Pre-cache colors to avoid repeated getColor calls
+            val colorResIds = listOf(
+                R.color.pet_color_1,
+                R.color.pet_color_2,
+                R.color.pet_color_3,
+                R.color.pet_color_4
+            )
+            val colors = colorResIds.map { 
+                ContextCompat.getColor(requireContext(), it) 
             }
             
             // Add pet views
-            pets.forEach { pet ->
+            pets.forEachIndexed { index, pet ->
                 val petView = LayoutInflater.from(requireContext())
-                    .inflate(R.layout.item_pet_home, petsContainer, false)
+                    .inflate(R.layout.item_pet_home, container, false)
                 
                 val petButton = petView.findViewById<Button>(R.id.petButton)
                 val petName = petView.findViewById<TextView>(R.id.petName)
                 
                 petName.text = pet.petName
                 
-                // Set different colors for pets
-                val colorResIds = listOf(
-                    R.color.pet_color_1,
-                    R.color.pet_color_2,
-                    R.color.pet_color_3,
-                    R.color.pet_color_4
-                )
+                // Use cached colors
                 val colorStateList = android.content.res.ColorStateList.valueOf(
-                    requireContext().getColor(colorResIds[pets.indexOf(pet) % 4])
+                    colors[index % 4]
                 )
                 petButton.backgroundTintList = colorStateList
                 
@@ -170,17 +224,19 @@ class HomeFragment : Fragment(R.layout.home) {
                     findNavController().navigate(R.id.petProfileFragment, bundle)
                 }
                 
-                petsContainer.addView(petView)
+                container.addView(petView)
             }
         }
     }
 
     private fun loadBookings(view: View) {
         lifecycleScope.launch {
-            val bookings = bookingRepository.getAll().first()
+            val bookings = withContext(Dispatchers.IO) {
+                bookingRepository.getAll().first()
+            }
             
-            val appointmentsContainer = view.findViewById<LinearLayout>(R.id.appointmentsContainer)
-            appointmentsContainer.removeAllViews()
+            val container = appointmentsContainer ?: view.findViewById<LinearLayout>(R.id.appointmentsContainer)
+            container.removeAllViews()
             
             // Show upcoming bookings (filter by future dates)
             val now = Instant.now()
@@ -189,17 +245,25 @@ class HomeFragment : Fragment(R.layout.home) {
                 .sortedBy { it.startTimeUtc }
                 .take(5) // Show up to 5 upcoming bookings
             
+            // Pre-create formatters to avoid repeated creation
+            val timeFormatter = DateTimeFormatter.ofPattern("h:mm a", Locale.getDefault())
+            val dateFormatter = DateTimeFormatter.ofPattern("MMMM d", Locale.getDefault())
+            
+            // Pre-calculate layout params
+            val dp302 = (302 * resources.displayMetrics.density).toInt()
+            val dp12 = (12 * resources.displayMetrics.density).toInt()
+            
             if (upcomingBookings.isEmpty()) {
                 val emptyText = TextView(requireContext()).apply {
                     text = "No upcoming appointments"
                     textSize = 14f
                     setPadding(32, 16, 32, 16)
                 }
-                appointmentsContainer.addView(emptyText)
+                container.addView(emptyText)
             } else {
                 upcomingBookings.forEach { booking ->
                     val cardView = LayoutInflater.from(requireContext())
-                        .inflate(R.layout.appointment_card, appointmentsContainer, false)
+                        .inflate(R.layout.appointment_card, container, false)
                     
                     val titleText = cardView.findViewById<TextView>(R.id.notisTitle)
                     val timeText = cardView.findViewById<TextView>(R.id.time)
@@ -214,13 +278,11 @@ class HomeFragment : Fragment(R.layout.home) {
                     val localDate = zonedDateTime.toLocalDate()
                     val localTime = zonedDateTime.toLocalTime()
                     
-                    timeText.text = localTime.format(DateTimeFormatter.ofPattern("h:mm a", Locale.getDefault()))
-                    dayText.text = localDate.format(DateTimeFormatter.ofPattern("MMMM d", Locale.getDefault()))
+                    timeText.text = localTime.format(timeFormatter)
+                    dayText.text = localDate.format(dateFormatter)
                     serviceTypeBtn.text = booking.serviceType
                     
                     // Set layout params for horizontal scrolling
-                    val dp302 = (302 * resources.displayMetrics.density).toInt()
-                    val dp12 = (12 * resources.displayMetrics.density).toInt()
                     val layoutParams = LinearLayout.LayoutParams(
                         dp302,
                         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -229,23 +291,23 @@ class HomeFragment : Fragment(R.layout.home) {
                     }
                     cardView.layoutParams = layoutParams
                     
-                    appointmentsContainer.addView(cardView)
+                    container.addView(cardView)
                 }
             }
         }
     }
 
     private fun updateProfileName(view: View) {
-        val profileNameTextView = view.findViewById<TextView>(R.id.name_text)
+        val textView = profileNameTextView ?: view.findViewById<TextView>(R.id.name_text)
+        profileNameTextView = textView
 
-        // Observe session state and update profile name
+        // Observe session state and update profile name (only once, not continuously)
         lifecycleScope.launch {
-            sessionManager.sessionFlow.collect { sessionState ->
-                if (sessionState.isLoggedIn && sessionState.fullName.isNotEmpty()) {
-                    profileNameTextView.text = sessionState.fullName
-                } else {
-                    profileNameTextView.text = "Guest User"
-                }
+            val sessionState = sessionManager.sessionFlow.first()
+            if (sessionState.isLoggedIn && sessionState.fullName.isNotEmpty()) {
+                textView.text = sessionState.fullName
+            } else {
+                textView.text = "Guest User"
             }
         }
     }

@@ -7,12 +7,15 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import ca.gbc.petcareapp.auth.presentation.AuthResult
 import ca.gbc.petcareapp.auth.presentation.AuthViewModel
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.activity_login) {
     private val vm: AuthViewModel by viewModels()
@@ -39,20 +42,22 @@ class LoginFragment : Fragment(R.layout.activity_login) {
             vm.login(email, pass)
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            vm.authState.collectLatest { state ->
-                when (state) {
-                    is AuthResult.Success -> {
-                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.homeFragment)
-                        loginBtn?.isEnabled = true
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.authState.collectLatest { state ->
+                    when (state) {
+                        is AuthResult.Success -> {
+                            Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.homeFragment)
+                            loginBtn?.isEnabled = true
+                        }
+                        is AuthResult.Error -> {
+                            Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                            loginBtn?.isEnabled = true
+                        }
+                        AuthResult.Loading -> loginBtn?.isEnabled = false
+                        AuthResult.Idle -> loginBtn?.isEnabled = true
                     }
-                    is AuthResult.Error -> {
-                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-                        loginBtn?.isEnabled = true
-                    }
-                    AuthResult.Loading -> loginBtn?.isEnabled = false
-                    AuthResult.Idle -> loginBtn?.isEnabled = true
                 }
             }
         }

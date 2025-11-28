@@ -19,6 +19,7 @@ import java.util.Locale
 class BkDateTimeFragment : Fragment(R.layout.bk_fragment_datetime) {
 
     private val bookingVM: BookingViewModel by activityViewModels()
+    private val notificationsVM: NotificationsViewModel by activityViewModels()
     private var selDate: LocalDate? = null
     private var selTime: LocalTime? = null
     
@@ -77,7 +78,7 @@ class BkDateTimeFragment : Fragment(R.layout.bk_fragment_datetime) {
             val booking = bookingVM.booking.value
             if (booking.isComplete) {
                 // Finalize the booking (saves to database, schedules notification)
-                bookingVM.finalizeBooking(requireContext())
+                bookingVM.finalizeBooking(requireContext(), notificationsVM)
                 
                 // Navigate to Home
                 findNavController().navigate(R.id.homeFragment)

@@ -9,10 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import ca.gbc.petcareapp.auth.data.AppDatabase
+import ca.gbc.petcareapp.auth.session.SessionManager
 import ca.gbc.petcareapp.pets.PetViewModel
 import ca.gbc.petcareapp.pets.PetViewModelFactory
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class AddPetDetailsFragment : Fragment(R.layout.add_pet_details) {
@@ -23,6 +25,7 @@ class AddPetDetailsFragment : Fragment(R.layout.add_pet_details) {
     private lateinit var saveBtn: MaterialButton
     private lateinit var backBtn: MaterialButton
     private lateinit var viewModel: PetViewModel
+    private lateinit var sessionManager: SessionManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,6 +33,7 @@ class AddPetDetailsFragment : Fragment(R.layout.add_pet_details) {
         val db = AppDatabase.get(requireContext())
         val factory = PetViewModelFactory(db)
         viewModel = ViewModelProvider(requireActivity(), factory)[PetViewModel::class.java]
+        sessionManager = SessionManager(requireContext())
 
         breedInput = view.findViewById(R.id.breedInput)
         ageInput = view.findViewById(R.id.ageInput)
@@ -64,7 +68,8 @@ class AddPetDetailsFragment : Fragment(R.layout.add_pet_details) {
             viewModel.desc = desc
 
             lifecycleScope.launch {
-                val userId = viewModel.currentUserId ?: 1L
+                val session = sessionManager.sessionFlow.first()
+                val userId = session.userId
                 val petId = viewModel.currentEditingPetId
 
                 if (petId != null) {

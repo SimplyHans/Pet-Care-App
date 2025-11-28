@@ -18,7 +18,8 @@ data class SessionState(
     val isLoggedIn: Boolean = false,
     val userId: Long = 0L,
     val fullName: String = "",
-    val currentRole: String = "consumer"
+    val currentRole: String = "consumer",
+    val isDarkMode: Boolean = false
 )
 
 
@@ -28,6 +29,7 @@ class SessionManager(private val context: Context) {
         val USER_ID = longPreferencesKey("user_id")
         val FULL_NAME = stringPreferencesKey("full_name")
         val CURRENT_ROLE = stringPreferencesKey("current_role")
+        val DARK_MODE = booleanPreferencesKey("dark_mode")
     }
 
 
@@ -36,7 +38,8 @@ class SessionManager(private val context: Context) {
             isLoggedIn = prefs[Keys.LOGGED_IN] ?: false,
             userId = prefs[Keys.USER_ID] ?: 0L,
             fullName = prefs[Keys.FULL_NAME] ?: "",
-            currentRole = prefs[Keys.CURRENT_ROLE] ?: "consumer"
+            currentRole = prefs[Keys.CURRENT_ROLE] ?: "consumer",
+            isDarkMode = prefs[Keys.DARK_MODE] ?: false
         )
     }
 
@@ -65,6 +68,12 @@ class SessionManager(private val context: Context) {
             val currentRole = prefs[Keys.CURRENT_ROLE] ?: "consumer"
             val newRole = if (currentRole == "consumer") "business" else "consumer"
             prefs[Keys.CURRENT_ROLE] = newRole
+        }
+    }
+
+    suspend fun setDarkMode(isDarkMode: Boolean) {
+        context.dataStore.edit { prefs ->
+            prefs[Keys.DARK_MODE] = isDarkMode
         }
     }
 }

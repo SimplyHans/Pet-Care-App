@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Light mode colors -->
     <color name="main">#f1f0ec</color>
     <color name="dark_main">#CAC9C0</color>
     <color name="secondary">#583123</color>
@@ -14,5 +15,11 @@
     <color name="pet_color_2">#5C96DB</color>
     <color name="pet_color_3">#AE37D1</color>
     <color name="pet_color_4">#B86F31</color>
-
+    
+    <!-- Text colors for light mode -->
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#666666</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="header_background">#D8CCC8</color>
+    <color name="border_color">#9f938d</color>
 </resources>

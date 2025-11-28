@@ -11,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import ca.gbc.petcareapp.auth.data.AppDatabase
 import ca.gbc.petcareapp.auth.data.User
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker) {
 
@@ -34,11 +36,16 @@ class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker
         val name2 = view.findViewById<TextView>(R.id.bk_item2_name)
         val name3 = view.findViewById<TextView>(R.id.bk_item3_name)
         val names = listOf(name1, name2, name3)
+        
+        val rating1 = view.findViewById<TextView>(R.id.bk_item1_rating)
+        val rating2 = view.findViewById<TextView>(R.id.bk_item2_rating)
+        val rating3 = view.findViewById<TextView>(R.id.bk_item3_rating)
+        val ratings = listOf(rating1, rating2, rating3)
 
         val continueBtn = view.findViewById<MaterialButton>(R.id.bk_btn_continue)
 
         // Load business users from database
-        loadBusinessUsers(view, rows, names, continueBtn)
+        loadBusinessUsers(view, rows, names, ratings, continueBtn)
 
         // simple visual highlight without new drawables
         fun markSelected(selected: View?) {
@@ -98,10 +105,13 @@ class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker
         view: View,
         rows: List<View>,
         names: List<TextView>,
+        ratings: List<TextView>,
         continueBtn: MaterialButton
     ) {
         lifecycleScope.launch {
-            val allBusinessUsers = db.userDao().findByRole("business")
+            val allBusinessUsers = withContext(Dispatchers.IO) {
+                db.userDao().findByRole("business")
+            }
             val selectedServiceType = bookingVM.booking.value.serviceType
             
             // Filter caregivers by service specialization
@@ -126,9 +136,9 @@ class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker
             
             // Add dummy caregivers if we have fewer than 3
             val dummyCaregivers = listOf(
-                User(id = -1, fullName = "Dr. Smith", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = null),
-                User(id = -2, fullName = "Dr. Johnson", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = null),
-                User(id = -3, fullName = "Dr. Williams", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = null)
+                User(id = -1, fullName = "Dr. Smith", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = "VETERINARY,GROOMING"),
+                User(id = -2, fullName = "Dr. Johnson", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = "GROOMING"),
+                User(id = -3, fullName = "Dr. Williams", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = "WALKING,TRAINING")
             )
             
             // Combine real and dummy caregivers to always show 3 options
@@ -138,6 +148,22 @@ class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker
             displayUsers.forEachIndexed { index, user ->
                 if (index < rows.size) {
                     names[index].text = user.fullName
+                    
+                    // Calculate rating for this caregiver
+                    val rating = if (user.id < 0) {
+                        // Dummy caregivers have predefined ratings
+                        when (user.id) {
+                            -1L -> 4.8  // Dr. Smith
+                            -2L -> 4.6  // Dr. Johnson
+                            -3L -> 4.9  // Dr. Williams
+                            else -> 4.5
+                        }
+                    } else {
+                        // Real users: generate consistent rating based on ID
+                        3.5 + (user.id % 3) * 0.5 // 3.5, 4.0, or 4.5
+                    }
+                    
+                    ratings[index].text = String.format("%.1f", rating)
                     rows[index].visibility = View.VISIBLE
                 }
             }

@@ -15,9 +15,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import ca.gbc.petcareapp.data.BookingRepository
 import ca.gbc.petcareapp.data.Booking as DbBooking
+import ca.gbc.petcareapp.utils.NotificationBadgeHelper
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.card.MaterialCardView
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -26,6 +30,11 @@ import java.util.Locale
 class BookListFragment : Fragment(R.layout.bk_list) {
 
     private lateinit var bookingRepository: BookingRepository
+    private var bookingsLoaded: Boolean = false
+    
+    // ViewModels for notifications
+    private val notificationsVM: NotificationsViewModel by activityViewModels()
+    private val bookingVM: BookingViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -83,17 +92,28 @@ class BookListFragment : Fragment(R.layout.bk_list) {
 
         // Load and display bookings
         loadBookings(view)
+        
+        // Update notification badge
+        NotificationBadgeHelper.updateBadge(this, header, notificationsVM, bookingVM, bookingRepository)
     }
 
     private fun loadBookings(view: View) {
+        if (bookingsLoaded) return // Avoid reloading if already loaded
         lifecycleScope.launch {
-            val bookings = bookingRepository.getAll().first()
+            val bookings = withContext(Dispatchers.IO) {
+                bookingRepository.getAll().first()
+            }
             
             val bookingsContainer = view.findViewById<LinearLayout>(R.id.bookingsContainer)
             bookingsContainer.removeAllViews()
             
             // Sort bookings by date (newest first)
             val sortedBookings = bookings.sortedByDescending { it.startTimeUtc }
+            
+            // Pre-create formatters
+            val timeFormatter = DateTimeFormatter.ofPattern("h:mm a", Locale.getDefault())
+            val dateFormatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.getDefault())
+            val now = Instant.now()
             
             if (sortedBookings.isEmpty()) {
                 val emptyText = TextView(requireContext()).apply {
@@ -123,12 +143,12 @@ class BookListFragment : Fragment(R.layout.bk_list) {
                     val localDate = zonedDateTime.toLocalDate()
                     val localTime = zonedDateTime.toLocalTime()
                     
-                    timeText.text = localTime.format(DateTimeFormatter.ofPattern("h:mm a", Locale.getDefault()))
-                    dayText.text = localDate.format(DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.getDefault()))
+                    timeText.text = localTime.format(timeFormatter)
+                    dayText.text = localDate.format(dateFormatter)
                     serviceTypeBtn.text = booking.serviceType
                     
                     // Set description
-                    val isPast = instant.isBefore(Instant.now())
+                    val isPast = instant.isBefore(now)
                     descText.text = if (isPast) "Completed" else "Upcoming"
                     
                     // Set layout params
@@ -143,6 +163,7 @@ class BookListFragment : Fragment(R.layout.bk_list) {
                     bookingsContainer.addView(cardView)
                 }
             }
+            bookingsLoaded = true
         }
     }
 }

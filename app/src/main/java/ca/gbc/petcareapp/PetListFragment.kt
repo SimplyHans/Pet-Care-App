@@ -15,21 +15,33 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.gbc.petcareapp.auth.data.AppDatabase
 import ca.gbc.petcareapp.auth.session.SessionManager
 import ca.gbc.petcareapp.pets.PetAdapter
+import ca.gbc.petcareapp.utils.NotificationBadgeHelper
+import ca.gbc.petcareapp.data.BookingRepository
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.card.MaterialCardView
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PetListFragment : Fragment(R.layout.pet_list) {
 
     private lateinit var sessionManager: SessionManager
     private lateinit var db: AppDatabase
     private lateinit var petAdapter: PetAdapter
+    private lateinit var bookingRepository: BookingRepository
+    private var lastPetsCount: Int = -1
+    
+    // ViewModels for notifications
+    private val notificationsVM: NotificationsViewModel by activityViewModels()
+    private val bookingVM: BookingViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         db = AppDatabase.get(requireContext())
         sessionManager = SessionManager(requireContext())
+        bookingRepository = BookingRepository(requireContext())
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_pets)
         petAdapter = PetAdapter(emptyList()) { pet ->
@@ -98,13 +110,38 @@ class PetListFragment : Fragment(R.layout.pet_list) {
         view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
             findNavController().navigate(R.id.notisFragment)
         }
+        
+        // Update notification badge
+        NotificationBadgeHelper.updateBadge(this, header, notificationsVM, bookingVM, bookingRepository)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Only refresh if data might have changed
+        lifecycleScope.launch {
+            val session = withContext(Dispatchers.IO) {
+                sessionManager.sessionFlow.first()
+            }
+            val userId = session.userId
+            val currentPetsCount = withContext(Dispatchers.IO) {
+                db.petDao().getPetsForUser(userId).size
+            }
+            if (currentPetsCount != lastPetsCount) {
+                loadUserPets()
+            }
+        }
     }
 
     private fun loadUserPets() {
         lifecycleScope.launch {
-            val session = sessionManager.sessionFlow.first()
+            val session = withContext(Dispatchers.IO) {
+                sessionManager.sessionFlow.first()
+            }
             val userId = session.userId
-            val pets = db.petDao().getPetsForUser(userId)
+            val pets = withContext(Dispatchers.IO) {
+                db.petDao().getPetsForUser(userId)
+            }
+            lastPetsCount = pets.size
             petAdapter.updatePets(pets)
         }
     }

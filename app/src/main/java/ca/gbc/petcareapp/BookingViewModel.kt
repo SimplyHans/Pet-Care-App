@@ -77,7 +77,7 @@ class BookingViewModel : ViewModel() {
      *
      * Pass an Activity/Fragment context (e.g., requireContext()).
      */
-    fun finalizeBooking(context: Context) {
+    fun finalizeBooking(context: Context, notificationsVM: NotificationsViewModel? = null) {
         val b = _booking.value
         if (!b.isComplete) return
 
@@ -85,13 +85,23 @@ class BookingViewModel : ViewModel() {
         val startInstant: Instant = whenLdt.atZone(ZoneId.systemDefault()).toInstant()
         val whenMillis = startInstant.toEpochMilli()
 
-        // 1) Update in-app feed immediately
-        val message = "Appointment booked with ${b.caregiverId} on ${b.date} at ${b.time} (${b.serviceType})"
+        // Format the service type nicely
+        val serviceTypeStr = b.serviceType!!.name.replace("_", " ").lowercase().replaceFirstChar { it.uppercase() }
+        val caregiverName = b.caregiverName ?: b.caregiverId ?: "your caregiver"
+        
+        // 1) Update in-app feed immediately (temporary notification)
+        val message = "Appointment booked with $caregiverName on ${b.date} at ${b.time} ($serviceTypeStr)"
         _notifications.value = listOf(message) + _notifications.value
+
+        // 1b) Also add to persistent notifications if available
+        notificationsVM?.addNotification(
+            title = "Appointment Booked",
+            message = "Your $serviceTypeStr appointment with $caregiverName has been confirmed for ${b.date} at ${b.time}."
+        )
 
         // 2) Schedule the system notification
         val title = "Booking: ${b.serviceType}"
-        val text  = "Caregiver ${b.caregiverName ?: b.caregiverId} at ${b.time} on ${b.date}"
+        val text  = "Caregiver $caregiverName at ${b.time} on ${b.date}"
         scheduleNotification(context, title, text, whenMillis)
 
         // 3) Persist to Room (Repository)
@@ -99,7 +109,7 @@ class BookingViewModel : ViewModel() {
             val repo = BookingRepository(context)
             val entity = DbBooking(
                 caregiverId   = b.caregiverId!!,
-                caregiverName = b.caregiverName ?: b.caregiverId!!,
+                caregiverName = caregiverName,
                 serviceType   = b.serviceType!!.name,   // store as String
                 notes         = null,                   // hook up if you add notes
                 startTimeUtc  = startInstant           // Instant (Converters handle it)

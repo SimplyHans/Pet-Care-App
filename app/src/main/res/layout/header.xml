@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D8CCC8">
+    android:background="@color/header_background">
 
     <!-- Top Rounded Background -->
     <View
@@ -50,13 +50,46 @@
         app:layout_constraintEnd_toStartOf="@+id/settingsBtn"
         android:layout_marginEnd="8dp">
 
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_gravity="center"
-            android:src="@drawable/bk_ic_bell"
-            app:tint="@color/secondary"
-            android:contentDescription="Notifications" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/notisIcon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:src="@drawable/bk_ic_bell"
+                app:tint="@color/secondary"
+                android:contentDescription="Notifications" />
+
+            <!-- Notification Badge -->
+            <View
+                android:id="@+id/notisBadge"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/notification_badge"
+                android:visibility="gone" />
+
+            <!-- Notification Counter (for counts > 9) -->
+            <TextView
+                android:id="@+id/notisCounter"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/notification_badge_counter"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </FrameLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <!-- Settings: brown circle container -->

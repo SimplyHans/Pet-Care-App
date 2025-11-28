@@ -142,4 +142,11 @@
     android:label="Pet Profile"
     tools:layout="@layout/pet_profile" />
 
+    <!--Staff List Page-->
+    <fragment
+        android:id="@+id/staffListFragment"
+        android:name="ca.gbc.petcareapp.StaffListFragment"
+        android:label="Staff"
+        tools:layout="@layout/staff_list" />
+
 </navigation>
