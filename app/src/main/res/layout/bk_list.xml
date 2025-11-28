@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/button_AddPet"
+        android:id="@+id/button_BkApoint"
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:cardCornerRadius="30dp"
@@ -47,8 +47,11 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cardPet"
+        android:id="@+id/cardBook"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
@@ -63,14 +66,6 @@
             android:orientation="vertical"
             android:background="@color/main">
 
-            <!-- RecyclerView for pets -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_pets"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:clipToPadding="false"
-                android:padding="4dp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
     <size android:width="18dp" android:height="18dp"/>
-    <solid android:color="@color/bk_dot_empty"/>
+    <solid android:color="@color/dark_main"/>
 </shape>

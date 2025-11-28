@@ -1,11 +1,14 @@
 package ca.gbc.petcareapp
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,41 +19,61 @@ import ca.gbc.petcareapp.data.Booking as DbBooking
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.Instant
-import java.time.LocalDate
-import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class HomeFragment : Fragment(R.layout.home) {
 
-    private lateinit var db: AppDatabase
     private lateinit var sessionManager: SessionManager
+    private lateinit var db: AppDatabase
     private lateinit var bookingRepository: BookingRepository
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        db = AppDatabase.get(requireContext())
+        // Initialize session manager and database
         sessionManager = SessionManager(requireContext())
+        db = AppDatabase.get(requireContext())
         bookingRepository = BookingRepository(requireContext())
 
-        view.findViewById<Button>(R.id.homeTab)?.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+        // Update header title
+        val header = view.findViewById<View>(R.id.header)
+        val title = header.findViewById<TextView>(R.id.title)
+        title.text = "Home"
+
+        // Bottom nav buttons
+        val homeTab = view.findViewById<ImageButton>(R.id.homeTab)
+        val bookTab = view.findViewById<ImageButton>(R.id.bookTab)
+        val petsTab = view.findViewById<ImageButton>(R.id.petsTab)
+
+        val selectedColor = ContextCompat.getColor(requireContext(), R.color.bright_orange)
+        val unselectedColor = ContextCompat.getColor(requireContext(), R.color.dark_main)
+
+        // Function to update bottom nav colors
+        fun highlightNav(selected: ImageButton) {
+            homeTab.imageTintList = ColorStateList.valueOf(if (selected == homeTab) selectedColor else unselectedColor)
+            bookTab.imageTintList = ColorStateList.valueOf(if (selected == bookTab) selectedColor else unselectedColor)
+            petsTab.imageTintList = ColorStateList.valueOf(if (selected == petsTab) selectedColor else unselectedColor)
         }
 
-        view.findViewById<Button>(R.id.bookTab)?.setOnClickListener {
-            findNavController().navigate(R.id.bookCaregiverPickerFragment)
+        // Set initial selection
+        highlightNav(homeTab)
+
+        // Bottom navigation click listeners
+        homeTab.setOnClickListener { highlightNav(homeTab) }
+
+        bookTab.setOnClickListener {
+            findNavController().navigate(R.id.bookListFragment)
+            highlightNav(bookTab)
         }
 
-        view.findViewById<Button>(R.id.petsTab)?.setOnClickListener {
+        petsTab.setOnClickListener {
             findNavController().navigate(R.id.petListFragment)
+            highlightNav(petsTab)
         }
 
-        view.findViewById<Button>(R.id.viewPetsBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.petListFragment)
-        }
-
+        // Other buttons
         view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
         }
@@ -64,9 +87,33 @@ class HomeFragment : Fragment(R.layout.home) {
             findNavController().navigate(R.id.addPetTypeFragment)
         }
 
+        // Quick action cards click handlers
+        val quickActionsContainer = view.findViewById<LinearLayout>(R.id.quickActionsContainer)
+        // Book card - navigate to book list
+        quickActionsContainer.findViewById<View>(0)?.setOnClickListener {
+            findNavController().navigate(R.id.bookListFragment)
+            highlightNav(bookTab)
+        }
+        // Add Pet card - navigate to add pet
+        quickActionsContainer.findViewById<View>(1)?.setOnClickListener {
+            findNavController().navigate(R.id.addPetTypeFragment)
+        }
+        // View Pets card - navigate to pet list
+        quickActionsContainer.findViewById<View>(2)?.setOnClickListener {
+            findNavController().navigate(R.id.petListFragment)
+            highlightNav(petsTab)
+        }
+        // Staff card - navigate to caregiver picker (business users)
+        quickActionsContainer.findViewById<View>(3)?.setOnClickListener {
+            findNavController().navigate(R.id.bookCaregiverPickerFragment)
+            highlightNav(bookTab)
+        }
+
         // Load pets and bookings
         loadPets(view)
         loadBookings(view)
+        
+        updateProfileName(view)
     }
 
     private fun loadPets(view: View) {
@@ -176,6 +223,21 @@ class HomeFragment : Fragment(R.layout.home) {
                     cardView.layoutParams = layoutParams
                     
                     appointmentsContainer.addView(cardView)
+                }
+            }
+        }
+    }
+
+    private fun updateProfileName(view: View) {
+        val profileNameTextView = view.findViewById<TextView>(R.id.name_text)
+
+        // Observe session state and update profile name
+        lifecycleScope.launch {
+            sessionManager.sessionFlow.collect { sessionState ->
+                if (sessionState.isLoggedIn && sessionState.fullName.isNotEmpty()) {
+                    profileNameTextView.text = sessionState.fullName
+                } else {
+                    profileNameTextView.text = "Guest User"
                 }
             }
         }

@@ -4,32 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bk_surface">
+    android:background="@color/main">
 
-    <!-- Header include -->
-    <include
-        android:id="@+id/header"
-        layout="@layout/header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Inner rounded panel -->
-    <com.google.android.material.card.MaterialCardView
+    <!-- Inner panel -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bk_panel"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        app:cardUseCompatPadding="false"
-        app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="@color/bk_panel"
-        app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toTopOf="@+id/bk_btn_continue"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +48,7 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/bk_avatar_bg" />
+                    android:background="@drawable/bk_dot_filled" />
             </LinearLayout>
 
             <!-- Title -->
@@ -77,124 +63,107 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <!-- breathing space like the mock -->
+            <!-- breathing space -->
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="20dp" />
 
-            <!-- ===================== REPLACED SECTION START ===================== -->
-            <!-- Row 1: Walking + Grooming -->
+            <!-- Row 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bk_service_walking"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Walking"
-                    android:textAllCaps="false"
-                    android:textStyle="bold"
-                    android:textColor="@color/bk_text_dark"
+                    android:layout_weight="1"
                     android:checkable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cornerRadius="15dp"
-                    app:backgroundTint="#D57E5F" />
+                    android:text="Walking"
+                    android:textAllCaps="false"
+                    android:textColor="@color/bk_text_dark"
+                    android:textStyle="bold"
+                    app:backgroundTint="#D57E5F"
+                    app:cornerRadius="15dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bk_service_grooming"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Grooming"
-                    android:textAllCaps="false"
-                    android:textStyle="bold"
-                    android:textColor="@color/bk_text_dark"
+                    android:layout_weight="1"
                     android:checkable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cornerRadius="15dp"
-                    app:backgroundTint="#D57E5F" />
+                    android:text="Grooming"
+                    android:textAllCaps="false"
+                    android:textColor="@color/bk_text_dark"
+                    android:textStyle="bold"
+                    app:backgroundTint="#D57E5F"
+                    app:cornerRadius="15dp" />
             </LinearLayout>
 
-            <!-- Row 2: Vet Visit + Boarding -->
+            <!-- Row 2 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bk_service_vet"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="Vet Visit"
-                    android:textAllCaps="false"
-                    android:textStyle="bold"
-                    android:textColor="@color/bk_text_dark"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:checkable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cornerRadius="15dp"
-                    app:backgroundTint="#D57E5F" />
+                    android:text="Vet Visit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/bk_text_dark"
+                    android:textStyle="bold"
+                    app:backgroundTint="#D57E5F"
+                    app:cornerRadius="15dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bk_service_boarding"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="Boarding"
-                    android:textAllCaps="false"
-                    android:textStyle="bold"
-                    android:textColor="@color/bk_text_dark"
+                    android:layout_weight="1"
                     android:checkable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cornerRadius="15dp"
-                    app:backgroundTint="#D57E5F" />
+                    android:text="Boarding"
+                    android:textAllCaps="false"
+                    android:textColor="@color/bk_text_dark"
+                    android:textStyle="bold"
+                    app:backgroundTint="#D57E5F"
+                    app:cornerRadius="15dp" />
             </LinearLayout>
-            <!-- ====================== REPLACED SECTION END ====================== -->
 
-            <!-- Push content up to keep air above the button -->
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Continue button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bk_btn_continue"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginBottom="12dp"
+        android:layout_height="wrap_content"
         android:text="@string/bk_continue"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
+        app:backgroundTint="@color/secondary"
         app:cornerRadius="24dp"
-        app:backgroundTint="@color/bk_brown"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/nav"/>
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="12dp"/>
 
-    <include
-        android:id="@+id/nav"
-        layout="@layout/navbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

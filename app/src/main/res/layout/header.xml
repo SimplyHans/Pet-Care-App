@@ -12,11 +12,11 @@
         android:id="@+id/viewBG_top"
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:background="@drawable/rounded_background"
-        android:backgroundTint="#EFE6E2"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/rounded_header_bg"
+        android:backgroundTint="@color/secondary"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Title -->
     <TextView
@@ -24,9 +24,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="PetCare App"
+        android:text="Title"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/viewBG_top"
         app:layout_constraintStart_toStartOf="@+id/viewBG_top"
         app:layout_constraintTop_toTopOf="@+id/viewBG_top"
@@ -38,7 +39,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         app:cardCornerRadius="21dp"
-        app:cardBackgroundColor="#5B4239"
+        app:cardBackgroundColor="@color/white"
         app:cardUseCompatPadding="false"
         app:cardPreventCornerOverlap="false"
         app:strokeWidth="0dp"
@@ -54,7 +55,7 @@
             android:layout_height="22dp"
             android:layout_gravity="center"
             android:src="@drawable/bk_ic_bell"
-            app:tint="@android:color/white"
+            app:tint="@color/secondary"
             android:contentDescription="Notifications" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -64,7 +65,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         app:cardCornerRadius="21dp"
-        app:cardBackgroundColor="#5B4239"
+        app:cardBackgroundColor="@color/white"
         app:cardUseCompatPadding="false"
         app:cardPreventCornerOverlap="false"
         app:strokeWidth="0dp"
@@ -81,7 +82,7 @@
             android:layout_gravity="center"
             android:contentDescription="Settings"
             android:src="@drawable/bk_ic_settings"
-            app:tint="@android:color/white" />
+            app:tint="@color/secondary" />
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

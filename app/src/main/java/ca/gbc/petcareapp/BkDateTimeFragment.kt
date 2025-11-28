@@ -24,22 +24,6 @@ class BkDateTimeFragment : Fragment(R.layout.bk_fragment_datetime) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ---- Header and Navbar actions ----
-        view.findViewById<Button>(R.id.homeTab)?.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
-        }
-        view.findViewById<Button>(R.id.bookTab)?.setOnClickListener {
-            findNavController().navigate(R.id.bkServiceTypeFragment)
-        }
-        view.findViewById<Button>(R.id.petsTab)?.setOnClickListener {
-            findNavController().navigate(R.id.petListFragment)
-        }
-        view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.settingsFragment)
-        }
-        view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.notisFragment)
-        }
 
         // ---- Booking logic ----
         val dayInput  = view.findViewById<EditText>(R.id.bk_input_day)

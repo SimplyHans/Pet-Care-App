@@ -19,41 +19,16 @@ import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class PetListFragment : Fragment(R.layout.pet_list) {
-
-    private lateinit var sessionManager: SessionManager
-    private lateinit var db: AppDatabase
-    private lateinit var petAdapter: PetAdapter
+class BookListFragment : Fragment(R.layout.bk_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        db = AppDatabase.get(requireContext())
-        sessionManager = SessionManager(requireContext())
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_pets)
-        petAdapter = PetAdapter(emptyList()) { pet ->
-            // Navigate to PetProfileFragment with pet details
-            val bundle = Bundle().apply {
-                putLong("petId", pet.id) // <-- use putLong if pet.id is Long
-                putString("petName", pet.petName)
-                putString("breed", pet.breed)
-                putInt("age", pet.age)
-                putString("description", pet.desc ?: "")
-            }
-            findNavController().navigate(R.id.petProfileFragment, bundle)
-        }
-        recyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = petAdapter
-        }
-
-        loadUserPets()
 
         // Update header title
         val header = view.findViewById<View>(R.id.header)
         val title = header.findViewById<TextView>(R.id.title)
-        title.text = "Pets"
+        title.text = "Appointments"
 
         // Bottom nav buttons
         val homeTab = view.findViewById<ImageButton>(R.id.homeTab)
@@ -71,14 +46,14 @@ class PetListFragment : Fragment(R.layout.pet_list) {
         }
 
         // Set initial selection
-        highlightNav(petsTab)
+        highlightNav(bookTab)
 
         // Bottom navigation click listeners
-        petsTab.setOnClickListener { highlightNav(petsTab) }
+        bookTab.setOnClickListener { highlightNav(bookTab) }
 
-        bookTab.setOnClickListener {
-            findNavController().navigate(R.id.bookListFragment)
-            highlightNav(bookTab)
+        petsTab.setOnClickListener {
+            findNavController().navigate(R.id.petListFragment)
+            highlightNav(petsTab)
         }
 
         homeTab.setOnClickListener {
@@ -86,9 +61,9 @@ class PetListFragment : Fragment(R.layout.pet_list) {
             highlightNav(homeTab)
         }
 
-        val addPetCard = view.findViewById<MaterialCardView>(R.id.button_AddPet)
-        addPetCard.setOnClickListener {
-            findNavController().navigate(R.id.addPetTypeFragment)
+        val addBook = view.findViewById<MaterialCardView>(R.id.button_BkApoint)
+        addBook.setOnClickListener {
+            findNavController().navigate(R.id.bookCaregiverPickerFragment)
         }
 
         view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
@@ -100,12 +75,4 @@ class PetListFragment : Fragment(R.layout.pet_list) {
         }
     }
 
-    private fun loadUserPets() {
-        lifecycleScope.launch {
-            val session = sessionManager.sessionFlow.first()
-            val userId = session.userId
-            val pets = db.petDao().getPetsForUser(userId)
-            petAdapter.updatePets(pets)
-        }
-    }
 }
