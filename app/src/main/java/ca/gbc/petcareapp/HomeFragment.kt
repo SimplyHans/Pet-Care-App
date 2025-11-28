@@ -89,22 +89,26 @@ class HomeFragment : Fragment(R.layout.home) {
 
         // Quick action cards click handlers
         val quickActionsContainer = view.findViewById<LinearLayout>(R.id.quickActionsContainer)
-        // Book card - navigate to book list
-        quickActionsContainer.findViewById<View>(0)?.setOnClickListener {
+        // Book card - navigate to book list (first card in first row)
+        val bookCard = quickActionsContainer.getChildAt(0)?.getChildAt(0) as? View
+        bookCard?.setOnClickListener {
             findNavController().navigate(R.id.bookListFragment)
             highlightNav(bookTab)
         }
-        // Add Pet card - navigate to add pet
-        quickActionsContainer.findViewById<View>(1)?.setOnClickListener {
+        // Add Pet card - navigate to add pet (second card in first row)
+        val addPetCard = quickActionsContainer.getChildAt(0)?.getChildAt(1) as? View
+        addPetCard?.setOnClickListener {
             findNavController().navigate(R.id.addPetTypeFragment)
         }
-        // View Pets card - navigate to pet list
-        quickActionsContainer.findViewById<View>(2)?.setOnClickListener {
+        // View Pets card - navigate to pet list (first card in second row)
+        val viewPetsCard = quickActionsContainer.getChildAt(1)?.getChildAt(0) as? View
+        viewPetsCard?.setOnClickListener {
             findNavController().navigate(R.id.petListFragment)
             highlightNav(petsTab)
         }
-        // Staff card - navigate to caregiver picker (business users)
-        quickActionsContainer.findViewById<View>(3)?.setOnClickListener {
+        // Staff card - navigate to caregiver picker (business users) (second card in second row)
+        val staffCard = quickActionsContainer.getChildAt(1)?.getChildAt(1) as? View
+        staffCard?.setOnClickListener {
             findNavController().navigate(R.id.bookCaregiverPickerFragment)
             highlightNav(bookTab)
         }
