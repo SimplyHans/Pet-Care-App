@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -90,26 +91,28 @@ class HomeFragment : Fragment(R.layout.home) {
         // Quick action cards click handlers
         val quickActionsContainer = view.findViewById<LinearLayout>(R.id.quickActionsContainer)
         // Book card - navigate to book list (first card in first row)
-        val bookCard = quickActionsContainer.getChildAt(0)?.getChildAt(0) as? View
+        val firstRow = quickActionsContainer.getChildAt(0) as? ViewGroup
+        val bookCard = firstRow?.getChildAt(0) as? View
         bookCard?.setOnClickListener {
             findNavController().navigate(R.id.bookListFragment)
             highlightNav(bookTab)
         }
         // Add Pet card - navigate to add pet (second card in first row)
-        val addPetCard = quickActionsContainer.getChildAt(0)?.getChildAt(1) as? View
+        val addPetCard = firstRow?.getChildAt(1) as? View
         addPetCard?.setOnClickListener {
             findNavController().navigate(R.id.addPetTypeFragment)
         }
         // View Pets card - navigate to pet list (first card in second row)
-        val viewPetsCard = quickActionsContainer.getChildAt(1)?.getChildAt(0) as? View
+        val secondRow = quickActionsContainer.getChildAt(1) as? ViewGroup
+        val viewPetsCard = secondRow?.getChildAt(0) as? View
         viewPetsCard?.setOnClickListener {
             findNavController().navigate(R.id.petListFragment)
             highlightNav(petsTab)
         }
-        // Staff card - navigate to caregiver picker (business users) (second card in second row)
-        val staffCard = quickActionsContainer.getChildAt(1)?.getChildAt(1) as? View
+        // Staff card - navigate to booking flow (second card in second row)
+        val staffCard = secondRow?.getChildAt(1) as? View
         staffCard?.setOnClickListener {
-            findNavController().navigate(R.id.bookCaregiverPickerFragment)
+            findNavController().navigate(R.id.bkServiceTypeFragment)
             highlightNav(bookTab)
         }
 

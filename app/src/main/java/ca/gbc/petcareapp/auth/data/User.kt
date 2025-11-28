@@ -16,5 +16,6 @@ data class User(
     val passwordHash: String,
     val salt: String,
     val role: String = "consumer",
+    val serviceSpecialization: String? = null, // Comma-separated list of services: "WALKING,GROOMING" or null for all
     val createdAt: Long = System.currentTimeMillis()
 )

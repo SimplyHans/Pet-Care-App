@@ -62,6 +62,18 @@
 
 
     <fragment
+        android:id="@+id/bkServiceTypeFragment"
+        android:name="ca.gbc.petcareapp.BkServiceTypeFragment"
+        android:label="Book Service"
+        tools:layout="@layout/bk_fragment_service_type">
+        
+        <!-- Service Type -> Caregiver Picker -->
+        <action
+            android:id="@+id/action_bkServiceTypeFragment_to_bookCaregiverPickerFragment"
+            app:destination="@id/bookCaregiverPickerFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/bookCaregiverPickerFragment"
         android:name="ca.gbc.petcareapp.BkCaregiverPickerFragment"
         android:label="Book Caregiver"
@@ -75,17 +87,7 @@
         android:id="@+id/bkDateTimeFragment"
         android:name="ca.gbc.petcareapp.BkDateTimeFragment"
         android:label="Book Date &amp; Time"
-        tools:layout="@layout/bk_fragment_datetime">
-        <action
-            android:id="@+id/action_bkDateTimeFragment_to_bkServiceTypeFragment"
-            app:destination="@id/bkServiceTypeFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/bkServiceTypeFragment"
-        android:name="ca.gbc.petcareapp.BkServiceTypeFragment"
-        android:label="Book Service"
-        tools:layout="@layout/bk_fragment_service_type" />
+        tools:layout="@layout/bk_fragment_datetime" />
 
     <fragment
         android:id="@+id/petListFragment"

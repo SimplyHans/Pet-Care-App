@@ -3,7 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/booking_graph"
-    app:startDestination="@id/bookCaregiverPickerFragment">
+    app:startDestination="@id/bkServiceTypeFragment">
+
+    <fragment
+        android:id="@+id/bkServiceTypeFragment"
+        android:name="ca.gbc.petcareapp.BkServiceTypeFragment"
+        android:label="Book Service"
+        tools:layout="@layout/bk_fragment_service_type">
+        
+        <!-- Service Type -> Caregiver Picker -->
+        <action
+            android:id="@+id/action_bkServiceTypeFragment_to_bookCaregiverPickerFragment"
+            app:destination="@id/bookCaregiverPickerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/bookCaregiverPickerFragment"
@@ -21,17 +33,5 @@
         android:id="@+id/bkDateTimeFragment"
         android:name="ca.gbc.petcareapp.BkDateTimeFragment"
         android:label="Book Date &amp; Time"
-        tools:layout="@layout/bk_fragment_datetime">
-
-        <!-- DateTime -> Service Type -->
-        <action
-            android:id="@+id/action_bkDateTimeFragment_to_bkServiceTypeFragment"
-            app:destination="@id/bkServiceTypeFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/bkServiceTypeFragment"
-        android:name="ca.gbc.petcareapp.BkServiceTypeFragment"
-        android:label="Book Service"
-        tools:layout="@layout/bk_fragment_service_type" />
+        tools:layout="@layout/bk_fragment_datetime" />
 </navigation>

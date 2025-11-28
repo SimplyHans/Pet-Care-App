@@ -89,12 +89,17 @@ class BkDateTimeFragment : Fragment(R.layout.bk_fragment_datetime) {
         }
 
         // --- Continue Button ---
-        // --- Continue Button ---
         btnContinue.setOnClickListener {
-            val nav = findNavController()
-            if (nav.currentDestination?.id == R.id.bkDateTimeFragment) {
-                // use the action id (no Safe Args needed)
-                nav.navigate(R.id.action_bkDateTimeFragment_to_bkServiceTypeFragment)
+            val booking = bookingVM.booking.value
+            if (booking.isComplete) {
+                // Finalize the booking (saves to database, schedules notification)
+                bookingVM.finalizeBooking(requireContext())
+                
+                // Navigate to Home
+                findNavController().navigate(R.id.homeFragment)
+                
+                // Reset the booking for next appointment
+                bookingVM.reset()
             }
         }
 

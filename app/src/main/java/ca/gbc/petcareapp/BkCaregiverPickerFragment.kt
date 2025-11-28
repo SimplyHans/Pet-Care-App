@@ -101,20 +101,54 @@ class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker
         continueBtn: MaterialButton
     ) {
         lifecycleScope.launch {
-            businessUsers = db.userDao().findByRole("business")
+            val allBusinessUsers = db.userDao().findByRole("business")
+            val selectedServiceType = bookingVM.booking.value.serviceType
             
-            // Update UI with business users
-            businessUsers.forEachIndexed { index, user ->
+            // Filter caregivers by service specialization
+            businessUsers = if (selectedServiceType != null) {
+                val serviceTypeName = selectedServiceType.name
+                allBusinessUsers.filter { user ->
+                    // If user has no specialization, they can do all services
+                    // Otherwise, check if their specialization includes the selected service
+                    user.serviceSpecialization == null || 
+                    user.serviceSpecialization.isEmpty() ||
+                    user.serviceSpecialization.contains(serviceTypeName, ignoreCase = true)
+                }
+            } else {
+                // If no service type selected, show all business users
+                allBusinessUsers
+            }
+            
+            // If no filtered users, show all business users as fallback
+            if (businessUsers.isEmpty()) {
+                businessUsers = allBusinessUsers
+            }
+            
+            // Add dummy caregivers if we have fewer than 3
+            val dummyCaregivers = listOf(
+                User(id = -1, fullName = "Dr. Smith", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = null),
+                User(id = -2, fullName = "Dr. Johnson", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = null),
+                User(id = -3, fullName = "Dr. Williams", email = "", passwordHash = "", salt = "", role = "business", serviceSpecialization = null)
+            )
+            
+            // Combine real and dummy caregivers to always show 3 options
+            val displayUsers = (businessUsers + dummyCaregivers).take(3)
+            
+            // Update UI with caregivers (real + dummy)
+            displayUsers.forEachIndexed { index, user ->
                 if (index < rows.size) {
                     names[index].text = user.fullName
                     rows[index].visibility = View.VISIBLE
                 }
             }
             
-            // Hide rows that don't have users
-            for (i in businessUsers.size until rows.size) {
+            // Hide rows that don't have users (shouldn't happen now, but just in case)
+            for (i in displayUsers.size until rows.size) {
                 rows[i].visibility = View.GONE
             }
+            
+            // Update businessUsers list to include dummies for click handlers
+            businessUsers = displayUsers
             
             // Restore selection after loading
             val currentCaregiverId = bookingVM.booking.value.caregiverId

@@ -37,6 +37,9 @@ class BkServiceTypeFragment : Fragment(R.layout.bk_fragment_service_type) {
                 ServiceType.BOARDING  -> boarding?.isChecked = true
             }
             btnContinue?.isEnabled = true
+            
+            // Auto-navigate to caregiver picker when service is selected
+            findNavController().navigate(R.id.action_bkServiceTypeFragment_to_bookCaregiverPickerFragment)
         }
 
         walking?.setOnClickListener  { select(ServiceType.WALKING) }
@@ -48,19 +51,10 @@ class BkServiceTypeFragment : Fragment(R.layout.bk_fragment_service_type) {
         btnContinue?.isEnabled = bookingVM.booking.value.serviceType != null
 
         // ---- Choose where Continue goes ----
-        // Preferred flow: Service -> Add notification -> Go Home or Confirmation
+        // Flow: Service Type -> Caregiver Picker
         btnContinue?.setOnClickListener {
-            val booking = bookingVM.booking.value
-            if (booking.isComplete) {
-                // Add booking to notifications
-                notificationsVM.addBookingNotification(booking)
-            }
-
-            // Optionally reset the booking for next appointment
-            bookingVM.reset()
-
-            // Navigate to Home or Confirmation screen
-            findNavController().navigate(R.id.homeFragment)
+            // Navigate to caregiver picker
+            findNavController().navigate(R.id.action_bkServiceTypeFragment_to_bookCaregiverPickerFragment)
         }
     }
 }

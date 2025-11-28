@@ -13,7 +13,7 @@ import ca.gbc.petcareapp.pets.PetDao
 
 @Database(
     entities = [User::class, Pet::class, Booking::class],
-    version = 4,                                   // ← bump after schema change
+    version = 5,                                   // ← bumped for serviceSpecialization field
     exportSchema = false
 )
 @TypeConverters(Converters::class)                 // ← make Room use Instant converters
