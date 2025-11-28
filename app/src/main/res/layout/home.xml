@@ -55,15 +55,26 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/businessRoleBtn" />
-    <include
-        android:id="@+id/appointmentCard"
-        layout="@layout/appointment_card"
+    
+    <HorizontalScrollView
+        android:id="@+id/appointmentsScroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-360dp"
+        android:layout_marginTop="12dp"
+        android:fillViewport="false"
+        android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@id/appointmentTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+        
+        <LinearLayout
+            android:id="@+id/appointmentsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"/>
+    </HorizontalScrollView>
 
 
     <TextView
@@ -111,6 +122,7 @@
             android:paddingEnd="16dp">
 
             <LinearLayout
+                android:id="@+id/addPetButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -128,68 +140,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Add"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="12dp"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:backgroundTint="#D57E5F"
-                    app:cornerRadius="15dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Bud"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="12dp"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:backgroundTint="#D57E5F"
-                    app:cornerRadius="15dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Daisy"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:backgroundTint="#D57E5F"
-                    app:cornerRadius="15dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Coco"
                     android:layout_marginTop="6dp"/>
             </LinearLayout>
 

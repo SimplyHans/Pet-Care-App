@@ -91,6 +91,7 @@
                     android:background="@drawable/bk_avatar_bg" />
 
                 <TextView
+                    android:id="@+id/bk_item1_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dr. Casilao"
@@ -114,6 +115,7 @@
                     android:background="@drawable/bk_avatar_bg" />
 
                 <TextView
+                    android:id="@+id/bk_item2_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dr. Casilao"
@@ -137,6 +139,7 @@
                     android:background="@drawable/bk_avatar_bg" />
 
                 <TextView
+                    android:id="@+id/bk_item3_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dr. Casilao"

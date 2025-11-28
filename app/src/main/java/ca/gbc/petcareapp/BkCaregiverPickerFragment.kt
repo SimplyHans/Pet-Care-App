@@ -3,17 +3,26 @@ package ca.gbc.petcareapp
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import ca.gbc.petcareapp.auth.data.AppDatabase
+import ca.gbc.petcareapp.auth.data.User
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.launch
 
 class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker) {
 
     private val bookingVM: BookingViewModel by activityViewModels()
+    private lateinit var db: AppDatabase
+    private var businessUsers: List<User> = emptyList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        db = AppDatabase.get(requireContext())
 
         // ---- Header / Navbar ----
         view.findViewById<Button>(R.id.homeTab)?.setOnClickListener {
@@ -37,8 +46,16 @@ class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker
         val row2 = view.findViewById<View>(R.id.bk_item2)
         val row3 = view.findViewById<View>(R.id.bk_item3)
         val rows = listOf(row1, row2, row3)
+        
+        val name1 = view.findViewById<TextView>(R.id.bk_item1_name)
+        val name2 = view.findViewById<TextView>(R.id.bk_item2_name)
+        val name3 = view.findViewById<TextView>(R.id.bk_item3_name)
+        val names = listOf(name1, name2, name3)
 
         val continueBtn = view.findViewById<MaterialButton>(R.id.bk_btn_continue)
+
+        // Load business users from database
+        loadBusinessUsers(view, rows, names, continueBtn)
 
         // simple visual highlight without new drawables
         fun markSelected(selected: View?) {
@@ -54,33 +71,79 @@ class BkCaregiverPickerFragment : Fragment(R.layout.bk_fragment_caregiver_picker
         }
 
         // restore prior selection if user navigates back
-        when (bookingVM.booking.value.caregiverId) {
-            "cg_1" -> markSelected(row1)
-            "cg_2" -> markSelected(row2)
-            "cg_3" -> markSelected(row3)
-            else   -> markSelected(null)
+        val currentCaregiverId = bookingVM.booking.value.caregiverId
+        val selectedIndex = businessUsers.indexOfFirst { it.id.toString() == currentCaregiverId }
+        if (selectedIndex >= 0 && selectedIndex < rows.size) {
+            markSelected(rows[selectedIndex])
+        } else {
+            markSelected(null)
         }
-        continueBtn.isEnabled = bookingVM.booking.value.caregiverId != null
+        continueBtn.isEnabled = currentCaregiverId != null
 
         row1.setOnClickListener {
-            bookingVM.setCaregiver("cg_1")
-            markSelected(row1)
-            continueBtn.isEnabled = true
+            if (businessUsers.isNotEmpty()) {
+                val user = businessUsers[0]
+                bookingVM.setCaregiver(user.id.toString(), user.fullName)
+                markSelected(row1)
+                continueBtn.isEnabled = true
+            }
         }
         row2.setOnClickListener {
-            bookingVM.setCaregiver("cg_2")
-            markSelected(row2)
-            continueBtn.isEnabled = true
+            if (businessUsers.size > 1) {
+                val user = businessUsers[1]
+                bookingVM.setCaregiver(user.id.toString(), user.fullName)
+                markSelected(row2)
+                continueBtn.isEnabled = true
+            }
         }
         row3.setOnClickListener {
-            bookingVM.setCaregiver("cg_3")
-            markSelected(row3)
-            continueBtn.isEnabled = true
+            if (businessUsers.size > 2) {
+                val user = businessUsers[2]
+                bookingVM.setCaregiver(user.id.toString(), user.fullName)
+                markSelected(row3)
+                continueBtn.isEnabled = true
+            }
         }
 
         // replace ONLY this click listener
         continueBtn.setOnClickListener {
             // if you navigate by destination id:
             findNavController().navigate(R.id.bkDateTimeFragment)}
+    }
+
+    private fun loadBusinessUsers(
+        view: View,
+        rows: List<View>,
+        names: List<TextView>,
+        continueBtn: MaterialButton
+    ) {
+        lifecycleScope.launch {
+            businessUsers = db.userDao().findByRole("business")
+            
+            // Update UI with business users
+            businessUsers.forEachIndexed { index, user ->
+                if (index < rows.size) {
+                    names[index].text = user.fullName
+                    rows[index].visibility = View.VISIBLE
+                }
+            }
+            
+            // Hide rows that don't have users
+            for (i in businessUsers.size until rows.size) {
+                rows[i].visibility = View.GONE
+            }
+            
+            // Restore selection after loading
+            val currentCaregiverId = bookingVM.booking.value.caregiverId
+            val selectedIndex = businessUsers.indexOfFirst { it.id.toString() == currentCaregiverId }
+            if (selectedIndex >= 0 && selectedIndex < rows.size) {
+                rows[selectedIndex].isSelected = true
+                rows[selectedIndex].alpha = 1f
+                rows[selectedIndex].scaleX = 1.02f
+                rows[selectedIndex].scaleY = 1.02f
+                rows[selectedIndex].elevation = 6f
+            }
+            continueBtn.isEnabled = currentCaregiverId != null
+        }
     }
 }

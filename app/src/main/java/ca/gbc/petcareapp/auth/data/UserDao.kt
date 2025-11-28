@@ -12,4 +12,7 @@ interface UserDao {
 
     @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
     suspend fun findByEmail(email: String): User?
+
+    @Query("SELECT * FROM users WHERE role = :role")
+    suspend fun findByRole(role: String): List<User>
 }
