@@ -1,14 +1,17 @@
 package ca.gbc.petcareapp
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import ca.gbc.petcareapp.auth.data.AppDatabase
 import ca.gbc.petcareapp.auth.session.SessionManager
 import ca.gbc.petcareapp.pets.PetViewModel
@@ -52,7 +55,9 @@ class PetProfileFragment : Fragment(R.layout.pet_profile) {
 
         val editBtn = view.findViewById<MaterialButton>(R.id.editBtn)
         val delBtn = view.findViewById<MaterialButton>(R.id.savePetBtn)
+        val backBtn = view.findViewById<MaterialButton>(R.id.backBtn)
 
+        // Populate fields
         nameView.text = petName
         breedInput.setText(breed)
         ageInput.setText(age.toString())
@@ -60,44 +65,78 @@ class PetProfileFragment : Fragment(R.layout.pet_profile) {
 
         val sessionManager = SessionManager(requireContext())
 
-        // ✅ EDIT BUTTON → start edit flow (same as Add Pet)
+        // EDIT BUTTON → start edit flow
         editBtn.setOnClickListener {
             lifecycleScope.launch {
                 val session = sessionManager.sessionFlow.first()
                 val userId = session.userId
 
-                // Store data in ViewModel
                 viewModel.petType = petType
                 viewModel.petName = petName
                 viewModel.breed = breed
                 viewModel.age = age
                 viewModel.desc = description
-
-                // Set a temporary property to know we’re editing this pet
                 viewModel.currentEditingPetId = petId
                 viewModel.currentUserId = userId
 
-                // Navigate to AddPetTypeFragment (reuse add flow)
                 findNavController().navigate(R.id.addPetTypeFragment)
             }
         }
 
-        // ✅ DELETE button
+        // DELETE BUTTON → remove pet and go back
         delBtn.setOnClickListener {
-            deletePetAndGoBack()
+            lifecycleScope.launch {
+                val session = sessionManager.sessionFlow.first()
+                val userId = session.userId
+
+                val pet = db.petDao().getPetsForUser(userId).firstOrNull { it.id == petId }
+                pet?.let { db.petDao().delete(it) }
+
+                findNavController().navigate(R.id.action_petProfileFragment_to_petListFragment)
+            }
         }
-    }
 
-    private fun deletePetAndGoBack() {
-        val sessionManager = SessionManager(requireContext())
-        lifecycleScope.launch {
-            val session = sessionManager.sessionFlow.first()
-            val userId = session.userId
+        backBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_petProfileFragment_to_petListFragment)
+        }
 
-            val pet = db.petDao().getPetsForUser(userId).firstOrNull { it.id == petId }
-            pet?.let { db.petDao().delete(it) }
+        val homeTab = view.findViewById<ImageButton>(R.id.homeTab)
+        val bookTab = view.findViewById<ImageButton>(R.id.bookTab)
+        val petsTab = view.findViewById<ImageButton>(R.id.petsTab)
 
-            findNavController().navigateUp()
+        val selectedColor = ContextCompat.getColor(requireContext(), R.color.bright_orange)
+        val unselectedColor = ContextCompat.getColor(requireContext(), R.color.dark_main)
+
+        fun highlightNav(selected: ImageButton) {
+            homeTab.imageTintList =
+                ColorStateList.valueOf(if (selected == homeTab) selectedColor else unselectedColor)
+            bookTab.imageTintList =
+                ColorStateList.valueOf(if (selected == bookTab) selectedColor else unselectedColor)
+            petsTab.imageTintList =
+                ColorStateList.valueOf(if (selected == petsTab) selectedColor else unselectedColor)
+        }
+
+        // Initially highlight the Pets tab
+        highlightNav(petsTab)
+
+        homeTab.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+            highlightNav(homeTab)
+        }
+        bookTab.setOnClickListener {
+            findNavController().navigate(R.id.bookListFragment)
+            highlightNav(bookTab)
+        }
+        petsTab.setOnClickListener {
+            findNavController().navigate(R.id.petListFragment)
+            highlightNav(petsTab)
+        }
+
+        view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.settingsFragment)
+        }
+        view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.notisFragment)
         }
     }
 }

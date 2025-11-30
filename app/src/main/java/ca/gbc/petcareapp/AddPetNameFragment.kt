@@ -1,10 +1,13 @@
 package ca.gbc.petcareapp
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -44,16 +47,34 @@ class AddPetNameFragment : Fragment(R.layout.add_pet_name) {
             findNavController().navigateUp() // <-- fixed navigation
         }
 
-        // Bottom navigation buttons
-        view.findViewById<View>(R.id.homeTab)?.setOnClickListener {
+        val homeTab = view.findViewById<ImageButton>(R.id.homeTab)
+        val bookTab = view.findViewById<ImageButton>(R.id.bookTab)
+        val petsTab = view.findViewById<ImageButton>(R.id.petsTab)
+
+        val selectedColor = ContextCompat.getColor(requireContext(), R.color.bright_orange)
+        val unselectedColor = ContextCompat.getColor(requireContext(), R.color.dark_main)
+
+        fun highlightNav(selected: ImageButton) {
+            homeTab.imageTintList = ColorStateList.valueOf(if (selected == homeTab) selectedColor else unselectedColor)
+            bookTab.imageTintList = ColorStateList.valueOf(if (selected == bookTab) selectedColor else unselectedColor)
+            petsTab.imageTintList = ColorStateList.valueOf(if (selected == petsTab) selectedColor else unselectedColor)
+        }
+
+        highlightNav(petsTab)
+
+        homeTab.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
+            highlightNav(homeTab)
         }
-        view.findViewById<View>(R.id.bookTab)?.setOnClickListener {
+        bookTab.setOnClickListener {
             findNavController().navigate(R.id.bookCaregiverPickerFragment)
+            highlightNav(bookTab)
         }
-        view.findViewById<View>(R.id.petsTab)?.setOnClickListener {
+        petsTab.setOnClickListener {
             findNavController().navigate(R.id.petListFragment)
+            highlightNav(petsTab)
         }
+
         view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
         }

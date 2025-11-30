@@ -35,6 +35,11 @@ class SettingsFragment : Fragment(R.layout.activity_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Update header title
+        val header = view.findViewById<View>(R.id.header)
+        val title = header.findViewById<TextView>(R.id.title)
+        title.text = "Settings"
+
         // Initialize
         sessionManager = SessionManager(requireContext())
         db = AppDatabase.get(requireContext())
