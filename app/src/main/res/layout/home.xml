@@ -73,7 +73,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 app:cardCornerRadius="25dp"
-                app:cardBackgroundColor="@color/bright_orange"
+                app:cardBackgroundColor="@color/secondary"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
@@ -109,7 +109,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 app:cardCornerRadius="25dp"
-                app:cardBackgroundColor="@color/bright_orange"
+                app:cardBackgroundColor="@color/secondary"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
@@ -146,42 +146,6 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-            <!-- View Pets Card -->
-            <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_view_pets"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="25dp"
-            app:cardBackgroundColor="@color/bright_orange"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground">
-
-                <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="16dp">
-
-                            <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:src="@drawable/pet_icon"
-                                app:tint="@android:color/white" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="6dp"
-                                android:gravity="center"
-                                android:text="Pets"
-                                android:textColor="@android:color/white"
-                                android:textSize="14sp"/>
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
 
                     <!-- Staff Card -->
                     <com.google.android.material.card.MaterialCardView
@@ -189,9 +153,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginStart="8dp"
                         app:cardCornerRadius="25dp"
-                        app:cardBackgroundColor="@color/bright_orange"
+                        app:cardBackgroundColor="#e0dbd6"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground">
@@ -207,7 +170,7 @@
                                 android:layout_width="36dp"
                                 android:layout_height="36dp"
                                 android:src="@drawable/staff_icon"
-                                app:tint="@android:color/white" />
+                                app:tint="@color/secondary" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -215,7 +178,7 @@
                                 android:layout_marginTop="6dp"
                                 android:gravity="center"
                                 android:text="Staff"
-                                android:textColor="@android:color/white"
+                                android:textColor="@color/secondary"
                                 android:textSize="14sp"/>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>

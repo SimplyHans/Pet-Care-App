@@ -114,9 +114,9 @@
                 android:id="@+id/tagApoint"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:padding="8sp"
                 android:backgroundTint="#86FFAA"
-                android:text="Video"
+                android:padding="8sp"
+                android:text="In-Person"
                 android:textColor="#554947"
                 android:textSize="8sp" />
         </LinearLayout>

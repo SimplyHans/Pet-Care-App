@@ -5,35 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D8CCC8"
+    android:background="@color/main"
     tools:context=".AddPetTypeFragment">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/petTypeCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
+        app:cardBackgroundColor="#EDE5E1"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
-        app:cardBackgroundColor="#EDE5E1"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toTopOf="@+id/nav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/AskPetType"
@@ -120,7 +111,7 @@
                 android:layout_height="53dp"
                 android:layout_marginTop="8dp"
                 android:textSize="25sp"
-                app:backgroundTint="#403933"
+                app:backgroundTint="@color/secondary"
                 app:cornerRadius="24dp"
                 app:icon="@drawable/ic_arrow_back"
                 app:iconGravity="textStart"
@@ -137,7 +128,7 @@
                 android:layout_marginEnd="120dp"
                 android:text="Next"
                 android:textSize="25sp"
-                app:backgroundTint="#403933"
+                app:backgroundTint="@color/secondary"
                 app:cornerRadius="24dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
@@ -147,16 +138,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/nav"
-        layout="@layout/navbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

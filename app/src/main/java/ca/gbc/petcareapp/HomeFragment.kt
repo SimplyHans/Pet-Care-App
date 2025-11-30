@@ -94,10 +94,6 @@ class HomeFragment : Fragment(R.layout.home) {
             findNavController().navigate(R.id.addPetTypeFragment)
         }
 
-        view.findViewById<View>(R.id.card_view_pets)?.setOnClickListener {
-            findNavController().navigate(R.id.petListFragment)
-        }
-
         view.findViewById<View>(R.id.card_book)?.setOnClickListener {
             findNavController().navigate(R.id.bkServiceTypeFragment)
         }

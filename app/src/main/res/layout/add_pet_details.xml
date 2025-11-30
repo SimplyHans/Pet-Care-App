@@ -5,37 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D8CCC8"
+    android:background="@color/main"
     tools:context=".AddPetDetailsFragment">
 
-    <!-- Header include -->
-    <include
-        android:id="@+id/header"
-        layout="@layout/header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Card containing the form -->
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/addPetDetailsCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
+
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
-        app:cardBackgroundColor="#EFE6E2"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toTopOf="@+id/nav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="match_parent">
 
 
             <TextView
@@ -134,7 +122,7 @@
                 android:layout_marginTop="8dp"
                 android:text="Save"
                 android:textSize="20sp"
-                app:backgroundTint="#403933"
+                app:backgroundTint="@color/secondary"
                 app:cornerRadius="24dp"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +134,7 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
                 android:textSize="25sp"
-                app:backgroundTint="#403933"
+                app:backgroundTint="@color/secondary"
                 app:cornerRadius="24dp"
                 app:icon="@drawable/ic_arrow_back"
                 app:iconGravity="textStart"
@@ -157,16 +145,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/nav"
-        layout="@layout/navbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
