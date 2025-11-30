@@ -67,6 +67,7 @@
 
             <!-- Book Card -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_book"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -184,6 +185,7 @@
 
                     <!-- Staff Card -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_staff"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
