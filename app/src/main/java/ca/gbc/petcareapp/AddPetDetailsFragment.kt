@@ -1,9 +1,11 @@
 package ca.gbc.petcareapp
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +16,7 @@ import ca.gbc.petcareapp.pets.PetViewModelFactory
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
+import android.widget.ImageButton
 
 class AddPetDetailsFragment : Fragment(R.layout.add_pet_details) {
 
@@ -42,7 +45,6 @@ class AddPetDetailsFragment : Fragment(R.layout.add_pet_details) {
             val ageText = ageInput.text.toString().trim()
             val desc = descInput.text.toString().trim()
 
-            // Validate inputs
             if (breed.isEmpty()) {
                 Toast.makeText(requireContext(), "Please enter the breed.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -85,21 +87,43 @@ class AddPetDetailsFragment : Fragment(R.layout.add_pet_details) {
             findNavController().navigateUp()
         }
 
-        // navbar
-        view.findViewById<View>(R.id.homeTab)?.setOnClickListener {
+        val homeTab = view.findViewById<ImageButton>(R.id.homeTab)
+        val bookTab = view.findViewById<ImageButton>(R.id.bookTab)
+        val petsTab = view.findViewById<ImageButton>(R.id.petsTab)
+
+        val selectedColor = ContextCompat.getColor(requireContext(), R.color.bright_orange)
+        val unselectedColor = ContextCompat.getColor(requireContext(), R.color.dark_main)
+
+        fun highlightNav(selected: ImageButton) {
+            homeTab.imageTintList =
+                ColorStateList.valueOf(if (selected == homeTab) selectedColor else unselectedColor)
+            bookTab.imageTintList =
+                ColorStateList.valueOf(if (selected == bookTab) selectedColor else unselectedColor)
+            petsTab.imageTintList =
+                ColorStateList.valueOf(if (selected == petsTab) selectedColor else unselectedColor)
+        }
+
+        highlightNav(petsTab)
+
+        homeTab.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
+            highlightNav(homeTab)
         }
-        view.findViewById<View>(R.id.bookTab)?.setOnClickListener {
-            findNavController().navigate(R.id.bookCaregiverPickerFragment)
+        bookTab.setOnClickListener {
+            findNavController().navigate(R.id.bookListFragment)
+            highlightNav(bookTab)
         }
-        view.findViewById<View>(R.id.petsTab)?.setOnClickListener {
+        petsTab.setOnClickListener {
             findNavController().navigate(R.id.petListFragment)
+            highlightNav(petsTab)
         }
+
         view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
         }
         view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
             findNavController().navigate(R.id.notisFragment)
         }
+        // ---------------------- END NAV BAR LOGIC ----------------------
     }
 }
