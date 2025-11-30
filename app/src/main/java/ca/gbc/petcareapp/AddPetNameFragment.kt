@@ -47,39 +47,5 @@ class AddPetNameFragment : Fragment(R.layout.add_pet_name) {
             findNavController().navigateUp() // <-- fixed navigation
         }
 
-        val homeTab = view.findViewById<ImageButton>(R.id.homeTab)
-        val bookTab = view.findViewById<ImageButton>(R.id.bookTab)
-        val petsTab = view.findViewById<ImageButton>(R.id.petsTab)
-
-        val selectedColor = ContextCompat.getColor(requireContext(), R.color.bright_orange)
-        val unselectedColor = ContextCompat.getColor(requireContext(), R.color.dark_main)
-
-        fun highlightNav(selected: ImageButton) {
-            homeTab.imageTintList = ColorStateList.valueOf(if (selected == homeTab) selectedColor else unselectedColor)
-            bookTab.imageTintList = ColorStateList.valueOf(if (selected == bookTab) selectedColor else unselectedColor)
-            petsTab.imageTintList = ColorStateList.valueOf(if (selected == petsTab) selectedColor else unselectedColor)
-        }
-
-        highlightNav(petsTab)
-
-        homeTab.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
-            highlightNav(homeTab)
-        }
-        bookTab.setOnClickListener {
-            findNavController().navigate(R.id.bookCaregiverPickerFragment)
-            highlightNav(bookTab)
-        }
-        petsTab.setOnClickListener {
-            findNavController().navigate(R.id.petListFragment)
-            highlightNav(petsTab)
-        }
-
-        view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.settingsFragment)
-        }
-        view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
-            findNavController().navigate(R.id.notisFragment)
-        }
     }
 }
