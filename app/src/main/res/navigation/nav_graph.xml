@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/welcomeFragment">
+
     <!--Authentication Pages-->
     <fragment
         android:id="@+id/welcomeFragment"
@@ -31,6 +32,7 @@
         android:name="ca.gbc.petcareapp.RegisterFragment"
         android:label="Register"
         tools:layout="@layout/activity_register" />
+
     <!--Home Page-->
     <fragment
         android:id="@+id/homeFragment"
@@ -60,7 +62,6 @@
         tools:layout="@layout/bk_list">
     </fragment>
 
-
     <fragment
         android:id="@+id/bookCaregiverPickerFragment"
         android:name="ca.gbc.petcareapp.BkCaregiverPickerFragment"
@@ -87,6 +88,7 @@
         android:label="Book Service"
         tools:layout="@layout/bk_fragment_service_type" />
 
+    <!-- Pets List -->
     <fragment
         android:id="@+id/petListFragment"
         android:name="ca.gbc.petcareapp.PetListFragment"
@@ -102,20 +104,20 @@
             app:destination="@id/petProfileFragment" />
     </fragment>
 
-
-    <!--Pets Page-->
+    <!-- Add Pet Pages -->
     <fragment
         android:id="@+id/addPetTypeFragment"
         android:name="ca.gbc.petcareapp.AddPetTypeFragment"
         android:label="Add Pet Type"
         tools:layout="@layout/add_pet_type">
+        <action
+            android:id="@+id/action_homeFragment_to_addPetTypeFragment"
+            app:destination="@id/addPetTypeFragment" />
 
         <action
             android:id="@+id/action_addPetTypeFragment_to_addPetNameFragment"
             app:destination="@id/addPetNameFragment" />
     </fragment>
-
-
 
     <fragment
         android:id="@+id/addPetNameFragment"
@@ -132,12 +134,19 @@
         android:id="@+id/addPetDetailsFragment"
         android:name="ca.gbc.petcareapp.AddPetDetailsFragment"
         android:label="Add Pet Details"
-        tools:layout="@layout/add_pet_details">
-    </fragment>
+        tools:layout="@layout/add_pet_details" />
+
+    <!-- Pet Profile -->
     <fragment
-    android:id="@+id/petProfileFragment"
-    android:name="ca.gbc.petcareapp.PetProfileFragment"
-    android:label="Pet Profile"
-    tools:layout="@layout/pet_profile" />
+        android:id="@+id/petProfileFragment"
+        android:name="ca.gbc.petcareapp.PetProfileFragment"
+        android:label="Pet Profile"
+        tools:layout="@layout/pet_profile">
+
+        <!-- BACK action to Pet List -->
+        <action
+            android:id="@+id/action_petProfileFragment_to_petListFragment"
+            app:destination="@id/petListFragment" />
+    </fragment>
 
 </navigation>

@@ -14,8 +14,10 @@ import androidx.navigation.fragment.findNavController
 import ca.gbc.petcareapp.auth.data.AppDatabase
 import com.google.android.material.button.MaterialButton
 import android.util.Log
+import android.widget.ImageButton
 import ca.gbc.petcareapp.pets.PetViewModel
 import ca.gbc.petcareapp.pets.PetViewModelFactory
+import androidx.core.content.ContextCompat
 
 class AddPetTypeFragment : Fragment() {
 
@@ -46,13 +48,11 @@ class AddPetTypeFragment : Fragment() {
             view.findViewById<RadioButton>(R.id.petType4)
         )
 
-        // Default style
         radioButtons.forEach { button ->
             button.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#E69C77"))
             button.setTextColor(Color.BLACK)
         }
 
-        // Change highlight on selection
         petTypeGroup.setOnCheckedChangeListener { _, checkedId ->
             radioButtons.forEach { button ->
                 if (button.id == checkedId) {
@@ -80,6 +80,45 @@ class AddPetTypeFragment : Fragment() {
 
         backBtn.setOnClickListener {
             findNavController().navigate(R.id.petListFragment)
+        }
+
+        val homeTab = view.findViewById<ImageButton>(R.id.homeTab)
+        val bookTab = view.findViewById<ImageButton>(R.id.bookTab)
+        val petsTab = view.findViewById<ImageButton>(R.id.petsTab)
+
+        val selectedColor = ContextCompat.getColor(requireContext(), R.color.bright_orange)
+        val unselectedColor = ContextCompat.getColor(requireContext(), R.color.dark_main)
+
+        fun highlightNav(selected: ImageButton) {
+            homeTab.imageTintList =
+                ColorStateList.valueOf(if (selected == homeTab) selectedColor else unselectedColor)
+            bookTab.imageTintList =
+                ColorStateList.valueOf(if (selected == bookTab) selectedColor else unselectedColor)
+            petsTab.imageTintList =
+                ColorStateList.valueOf(if (selected == petsTab) selectedColor else unselectedColor)
+        }
+
+        // Initially highlight Pets tab
+        highlightNav(petsTab)
+
+        homeTab.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+            highlightNav(homeTab)
+        }
+        bookTab.setOnClickListener {
+            findNavController().navigate(R.id.bookListFragment)
+            highlightNav(bookTab)
+        }
+        petsTab.setOnClickListener {
+            findNavController().navigate(R.id.petListFragment)
+            highlightNav(petsTab)
+        }
+
+        view.findViewById<View>(R.id.settingsBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.settingsFragment)
+        }
+        view.findViewById<View>(R.id.notisBtn)?.setOnClickListener {
+            findNavController().navigate(R.id.notisFragment)
         }
 
         return view
